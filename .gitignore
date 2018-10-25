@@ -50,3 +50,10 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+*.suo
+/src/AirCodeGeneration/.vs/AirCodeGeneration
+/src/AirCodeGeneration/Air.Currency.Library/bin/Debug
+/src/AirCodeGeneration/Air.Currency.Library/obj
+/src/AirCodeGeneration/AirCodeGeneration/bin/Debug
+/src/AirCodeGeneration/AirCodeGeneration/obj/Debug
+/src/AirCodeGeneration/AirCodeGeneration/Properties

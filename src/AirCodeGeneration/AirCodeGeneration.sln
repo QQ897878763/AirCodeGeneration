@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2016
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirCodeGeneration", "AirCodeGeneration\AirCodeGeneration.csproj", "{77A5F447-BEEF-4233-95A3-624E72AC1BB0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01.Basics", "01.Basics", "{5B7BC05A-C4D0-4FBB-83F0-B3500BDF906D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Air.Currency.Library", "Air.Currency.Library\Air.Currency.Library.csproj", "{A41522E5-F906-4AFB-AB9B-0C9EE861B786}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{77A5F447-BEEF-4233-95A3-624E72AC1BB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77A5F447-BEEF-4233-95A3-624E72AC1BB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77A5F447-BEEF-4233-95A3-624E72AC1BB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77A5F447-BEEF-4233-95A3-624E72AC1BB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A41522E5-F906-4AFB-AB9B-0C9EE861B786}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A41522E5-F906-4AFB-AB9B-0C9EE861B786}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A41522E5-F906-4AFB-AB9B-0C9EE861B786}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A41522E5-F906-4AFB-AB9B-0C9EE861B786}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A41522E5-F906-4AFB-AB9B-0C9EE861B786} = {5B7BC05A-C4D0-4FBB-83F0-B3500BDF906D}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D4118A5A-2427-4A60-8373-7D21DAE0A263}
+	EndGlobalSection
+EndGlobal
