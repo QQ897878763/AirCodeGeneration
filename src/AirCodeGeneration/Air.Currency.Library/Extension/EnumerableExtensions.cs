@@ -10,7 +10,7 @@ namespace Air.Currency.Library.Extension
     /// <summary>
     /// 集合通用扩展
     /// </summary>
-    public static class EnumerableUtils
+    public static class EnumerableExtensions
     {
         /// <summary>
         /// 遍历处理指定的action函数
