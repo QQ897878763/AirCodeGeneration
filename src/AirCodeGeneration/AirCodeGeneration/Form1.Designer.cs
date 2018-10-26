@@ -28,13 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.dpleft = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.SuspendLayout();
+            // 
+            // dpleft
+            // 
+            this.dpleft.ActiveAutoHideContent = null;
+            this.dpleft.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dpleft.Location = new System.Drawing.Point(0, 0);
+            this.dpleft.Margin = new System.Windows.Forms.Padding(4);
+            this.dpleft.Name = "dpleft";
+            this.dpleft.Size = new System.Drawing.Size(979, 515);
+            this.dpleft.TabIndex = 3;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(979, 515);
+            this.Controls.Add(this.dpleft);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -42,6 +54,8 @@
         }
 
         #endregion
+
+        private WeifenLuo.WinFormsUI.Docking.DockPanel dpleft;
     }
 }
 

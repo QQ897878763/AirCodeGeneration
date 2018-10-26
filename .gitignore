@@ -57,3 +57,4 @@ dkms.conf
 /src/AirCodeGeneration/AirCodeGeneration/bin/Debug
 /src/AirCodeGeneration/AirCodeGeneration/obj/Debug
 
+/src/AirCodeGeneration/Air.WeifenLuo.WinFormsUI/obj/Debug
