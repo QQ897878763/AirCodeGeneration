@@ -71,7 +71,7 @@
             this.tview.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode1});
             this.tview.SelectedImageIndex = 0;
-            this.tview.Size = new System.Drawing.Size(231, 325);
+            this.tview.Size = new System.Drawing.Size(231, 513);
             this.tview.TabIndex = 2;
             // 
             // imageList1
@@ -94,7 +94,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(231, 352);
+            this.ClientSize = new System.Drawing.Size(231, 540);
             this.Controls.Add(this.tview);
             this.Controls.Add(this.toolStrip1);
             this.Name = "ToolWindow";
