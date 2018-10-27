@@ -58,6 +58,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmSqlScript.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSqlScript.Designer.cs">
+      <DependentUpon>FrmSqlScript.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmSQLServerConnect.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -68,6 +74,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSqlScript.resx">
+      <DependentUpon>FrmSqlScript.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmSQLServerConnect.resx">
       <DependentUpon>FrmSQLServerConnect.cs</DependentUpon>
@@ -97,6 +106,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Air.CodeGeneration.Common\Air.CodeGeneration.Common.csproj">
+      <Project>{2283403f-c89f-4a7d-9594-9d1103af61e2}</Project>
+      <Name>Air.CodeGeneration.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Air.Currency.Library\Air.Currency.Library.csproj">
       <Project>{a41522e5-f906-4afb-ab9b-0c9ee861b786}</Project>
       <Name>Air.Currency.Library</Name>

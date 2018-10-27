@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Air.Currency.Library\Air.Currency.Library.csproj" />
+    <ProjectReference Include="..\AirCodeGeneration.Data\AirCodeGeneration.Data.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -18,14 +18,20 @@ namespace AirCodeGeneration
         {
             InitializeComponent();
             AutoScaleMode = AutoScaleMode.Dpi;
-           
+            CreateStandardControls();
+     
         }
         private void CreateStandardControls()
         {
+            IsMdiContainer = true;
             m_toolbox = new ToolWindow();
-            this.dpleft.Controls.Add(m_toolbox);
-            m_toolbox.Show(dpleft, new Rectangle(98, 133, 200, 383));
+            m_toolbox.Show(dpleft);
+            m_toolbox.DockTo(dpleft, DockStyle.Left);
+            //this.dpleft.Controls.Add(m_toolbox);
+            //m_toolbox.Show(dpleft, new Rectangle(98, 133, 200, 383));
         }
 
+
+     
     }
 }

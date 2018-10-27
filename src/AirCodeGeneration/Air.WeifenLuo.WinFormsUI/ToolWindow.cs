@@ -17,6 +17,9 @@ namespace Air.WeifenLuo.WinFormsUI
         {
             InitializeComponent();
             AutoScaleMode = AutoScaleMode.Dpi;
+            this.CloseButton = true;
+            this.HideOnClose = true;
+            this.IsHidden = true;
             tview.ExpandAll();
         }
     }

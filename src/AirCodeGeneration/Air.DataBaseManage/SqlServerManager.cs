@@ -4,8 +4,8 @@ using System.Text;
 
 namespace Air.DataBaseManage
 {
-    public class SqlServerManager : IDbManager
-    {
+    //public class SqlServerManager : IDbManager
+    //{
 
-    }
+    //}
 }
