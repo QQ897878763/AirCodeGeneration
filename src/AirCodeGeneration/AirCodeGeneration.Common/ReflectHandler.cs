@@ -5,7 +5,7 @@ using System.Reflection;
 using System.ComponentModel.DataAnnotations;
 using System.Data;
 using Air.Currency.Library;
-using AirCodeGeneration.Data.Dto;
+using Air.Data.Dto;
 
 namespace AirCodeGeneration.Common
 {

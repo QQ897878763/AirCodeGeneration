@@ -10,7 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Air.Currency.Library\Air.Currency.Library.csproj" />
-    <ProjectReference Include="..\AirCodeGeneration.Data\AirCodeGeneration.Data.csproj" />
+    <ProjectReference Include="..\Air.Data\Air.Data.csproj" />
   </ItemGroup>
 
 </Project>

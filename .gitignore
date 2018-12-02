@@ -63,3 +63,12 @@ dkms.conf
 /src/AirCodeGeneration/AirCodeGeneration.Common/bin/Debug/netstandard2.0
 /src/AirCodeGeneration/AirCodeGeneration.Common/obj
 /src/AirCodeGeneration/AirCodeGeneration.Data/obj
+/src/AirCodeGeneration/Air.Code.Generation.Sample/obj/Debug
+/src/AirCodeGeneration/Air.CodeGeneration.DataBase/bin/Debug
+/src/AirCodeGeneration/Air.CodeGeneration.DataBase/obj/Debug
+/src/AirCodeGeneration/Air.Currency.Frame.Library/bin/Debug
+/src/AirCodeGeneration/Air.Currency.Frame.Library/obj/Debug
+/src/AirCodeGeneration/Air.Data/obj/Debug
+/src/AirCodeGeneration/Air.T4.Common/bin/Debug
+/src/AirCodeGeneration/Air.T4.Common/obj/Debug
+/src/AirCodeGeneration/Air.Test/obj/Debug

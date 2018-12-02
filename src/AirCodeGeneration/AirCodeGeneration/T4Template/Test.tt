@@ -1,0 +1,17 @@
+﻿<#@ output extension=".txt" #>
+Squares:
+<#
+    for(int i = 0; i < 4; i++)
+    {
+#>
+    The square of <#= i #> is <#= Square(i+1) #>.
+<#
+    } 
+#>
+That is the end of the list.
+<#+   // Start of class feature block
+private int Square(int i)
+{
+    return i*i;
+}
+#>

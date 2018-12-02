@@ -42,13 +42,15 @@
             this.tabControl_Pages = new System.Windows.Forms.TabControl();
             this.tab_Details = new System.Windows.Forms.TabPage();
             this.dgv_Dll = new System.Windows.Forms.DataGridView();
-            this.rich_Txt_Logs = new System.Windows.Forms.RichTextBox();
-            this.tab_Code = new System.Windows.Forms.TabPage();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.Col_Sel = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Col_Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Col_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Col_ColumnCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rich_Txt_Logs = new System.Windows.Forms.RichTextBox();
+            this.tab_Code = new System.Windows.Forms.TabPage();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.label3 = new System.Windows.Forms.Label();
+            this.txt_DatabaseName = new System.Windows.Forms.TextBox();
             this.pan_Head.SuspendLayout();
             this.pan_Fill.SuspendLayout();
             this.tabControl_Pages.SuspendLayout();
@@ -58,6 +60,8 @@
             // 
             // pan_Head
             // 
+            this.pan_Head.Controls.Add(this.txt_DatabaseName);
+            this.pan_Head.Controls.Add(this.label3);
             this.pan_Head.Controls.Add(this.txt_Output);
             this.pan_Head.Controls.Add(this.label2);
             this.pan_Head.Controls.Add(this.btn_Execute);
@@ -67,7 +71,7 @@
             this.pan_Head.Dock = System.Windows.Forms.DockStyle.Top;
             this.pan_Head.Location = new System.Drawing.Point(0, 0);
             this.pan_Head.Name = "pan_Head";
-            this.pan_Head.Size = new System.Drawing.Size(1123, 122);
+            this.pan_Head.Size = new System.Drawing.Size(1123, 166);
             this.pan_Head.TabIndex = 0;
             // 
             // txt_Output
@@ -88,12 +92,13 @@
             // 
             // btn_Execute
             // 
-            this.btn_Execute.Location = new System.Drawing.Point(624, 69);
+            this.btn_Execute.Location = new System.Drawing.Point(473, 114);
             this.btn_Execute.Name = "btn_Execute";
             this.btn_Execute.Size = new System.Drawing.Size(118, 29);
             this.btn_Execute.TabIndex = 3;
             this.btn_Execute.Text = "生成SQL脚本";
             this.btn_Execute.UseVisualStyleBackColor = true;
+            this.btn_Execute.Click += new System.EventHandler(this.btn_Execute_Click);
             // 
             // txt_DllFilePath
             // 
@@ -113,7 +118,7 @@
             // 
             // btn_SelectDLL
             // 
-            this.btn_SelectDLL.Location = new System.Drawing.Point(624, 17);
+            this.btn_SelectDLL.Location = new System.Drawing.Point(340, 115);
             this.btn_SelectDLL.Name = "btn_SelectDLL";
             this.btn_SelectDLL.Size = new System.Drawing.Size(97, 29);
             this.btn_SelectDLL.TabIndex = 0;
@@ -129,9 +134,9 @@
             // 
             this.pan_Fill.Controls.Add(this.tabControl_Pages);
             this.pan_Fill.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pan_Fill.Location = new System.Drawing.Point(0, 122);
+            this.pan_Fill.Location = new System.Drawing.Point(0, 166);
             this.pan_Fill.Name = "pan_Fill";
-            this.pan_Fill.Size = new System.Drawing.Size(1123, 661);
+            this.pan_Fill.Size = new System.Drawing.Size(1123, 617);
             this.pan_Fill.TabIndex = 1;
             // 
             // tabControl_Pages
@@ -142,7 +147,7 @@
             this.tabControl_Pages.Location = new System.Drawing.Point(0, 0);
             this.tabControl_Pages.Name = "tabControl_Pages";
             this.tabControl_Pages.SelectedIndex = 0;
-            this.tabControl_Pages.Size = new System.Drawing.Size(1123, 661);
+            this.tabControl_Pages.Size = new System.Drawing.Size(1123, 617);
             this.tabControl_Pages.TabIndex = 0;
             // 
             // tab_Details
@@ -152,7 +157,7 @@
             this.tab_Details.Location = new System.Drawing.Point(4, 25);
             this.tab_Details.Name = "tab_Details";
             this.tab_Details.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_Details.Size = new System.Drawing.Size(1115, 632);
+            this.tab_Details.Size = new System.Drawing.Size(1115, 588);
             this.tab_Details.TabIndex = 0;
             this.tab_Details.Text = "DLL详情";
             this.tab_Details.UseVisualStyleBackColor = true;
@@ -171,33 +176,9 @@
             this.dgv_Dll.Name = "dgv_Dll";
             this.dgv_Dll.RowHeadersVisible = false;
             this.dgv_Dll.RowTemplate.Height = 27;
-            this.dgv_Dll.Size = new System.Drawing.Size(1109, 475);
+            this.dgv_Dll.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgv_Dll.Size = new System.Drawing.Size(1109, 431);
             this.dgv_Dll.TabIndex = 1;
-            // 
-            // rich_Txt_Logs
-            // 
-            this.rich_Txt_Logs.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.rich_Txt_Logs.Location = new System.Drawing.Point(3, 478);
-            this.rich_Txt_Logs.Name = "rich_Txt_Logs";
-            this.rich_Txt_Logs.Size = new System.Drawing.Size(1109, 151);
-            this.rich_Txt_Logs.TabIndex = 0;
-            this.rich_Txt_Logs.Text = "";
-            // 
-            // tab_Code
-            // 
-            this.tab_Code.Location = new System.Drawing.Point(4, 25);
-            this.tab_Code.Name = "tab_Code";
-            this.tab_Code.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_Code.Size = new System.Drawing.Size(1115, 632);
-            this.tab_Code.TabIndex = 1;
-            this.tab_Code.Text = "输出代码";
-            this.tab_Code.UseVisualStyleBackColor = true;
-            // 
-            // imageList1
-            // 
-            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // Col_Sel
             // 
@@ -226,6 +207,47 @@
             this.Col_ColumnCount.HeaderText = "字段数";
             this.Col_ColumnCount.Name = "Col_ColumnCount";
             this.Col_ColumnCount.Width = 90;
+            // 
+            // rich_Txt_Logs
+            // 
+            this.rich_Txt_Logs.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.rich_Txt_Logs.Location = new System.Drawing.Point(3, 434);
+            this.rich_Txt_Logs.Name = "rich_Txt_Logs";
+            this.rich_Txt_Logs.Size = new System.Drawing.Size(1109, 151);
+            this.rich_Txt_Logs.TabIndex = 0;
+            this.rich_Txt_Logs.Text = "";
+            // 
+            // tab_Code
+            // 
+            this.tab_Code.Location = new System.Drawing.Point(4, 25);
+            this.tab_Code.Name = "tab_Code";
+            this.tab_Code.Padding = new System.Windows.Forms.Padding(3);
+            this.tab_Code.Size = new System.Drawing.Size(1115, 632);
+            this.tab_Code.TabIndex = 1;
+            this.tab_Code.Text = "输出代码";
+            this.tab_Code.UseVisualStyleBackColor = true;
+            // 
+            // imageList1
+            // 
+            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(44, 121);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(82, 15);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "数据库名称";
+            // 
+            // txt_DatabaseName
+            // 
+            this.txt_DatabaseName.Location = new System.Drawing.Point(132, 115);
+            this.txt_DatabaseName.Name = "txt_DatabaseName";
+            this.txt_DatabaseName.Size = new System.Drawing.Size(161, 25);
+            this.txt_DatabaseName.TabIndex = 7;
             // 
             // FrmSqlScript
             // 
@@ -268,5 +290,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Col_Number;
         private System.Windows.Forms.DataGridViewTextBoxColumn Col_Name;
         private System.Windows.Forms.DataGridViewTextBoxColumn Col_ColumnCount;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txt_DatabaseName;
     }
 }
