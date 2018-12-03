@@ -16,12 +16,12 @@ USE  [<#=        databaseInfo.Name #>]
      CREATE TABLE [dbo].[<#=            databaseInfo.TableItems[i].Name #>] 
      (
 <#        for(int k =0; k< databaseInfo.TableItems[i].FieldRuleItems.Count;k++)
-        {
+         {
             var item = databaseInfo.TableItems[i].FieldRuleItems[k];
-            if(k!=0) //不为第一行则需要加逗号
-            {#>, <#            }#> <#=                item.Name #>   <#=                item.DataType #> <#            if(!string.IsNullOrWhiteSpace(item.IdentityValue)){ #> <#=                    item.IdentityValue #> <#            }#><#            if(!string.IsNullOrWhiteSpace(item.Constraint)){ #> <#=                    item.Constraint #> <#            }#><#            if(!string.IsNullOrWhiteSpace(item.DefaultValue)){ #> <#=                    item.DefaultValue #> <#            }#> <#            if(item.IsPramaryKey){ #> Primary Key <#            } #>  --<#            if(!string.IsNullOrWhiteSpace(item.Remark)){ #> <#=                    item.Remark #><#            } #>
+#>       <#=                item.Name #>   <#=                item.DataType #> <#            if(!string.IsNullOrWhiteSpace(item.IdentityValue)){ #> <#=                    item.IdentityValue #> <#            }#><#            if(!string.IsNullOrWhiteSpace(item.Constraint)){ #> <#=                    item.Constraint #> <#            }#><#            if(!string.IsNullOrWhiteSpace(item.DefaultValue)){ #> default  <#=                    item.DefaultValue #> <#            }#> <#            if(item.IsPramaryKey){ #> Primary Key <#            } #>  <#            if(k != databaseInfo.TableItems[i].FieldRuleItems.Count-1){#> , <#} #> --<#if(!string.IsNullOrWhiteSpace(item.Remark)){ #> <#=item.Remark #><#} #>
     
-<#        }#>  
+<#       }#>  
      )
-<#    }#>
+<#    
+    }#>
 
