@@ -40,7 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attribute\SqlCreateIsgnoreAttribute.cs" />
+    <Compile Include="Attribute\DataBaseFieldRuleAttribute.cs" />
+    <Compile Include="Attribute\DataBaseTableRuleAttribute.cs" />
     <Compile Include="Dto\TypeReflectDto.cs" />
     <Compile Include="Model\Database.cs" />
     <Compile Include="Model\DatabaseTable.cs" />

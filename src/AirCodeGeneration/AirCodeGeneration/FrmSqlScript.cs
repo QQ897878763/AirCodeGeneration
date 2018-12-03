@@ -10,14 +10,14 @@ using System.Windows.Forms;
 using System.IO;
 using Air.CodeGeneration.Common;
 using Air.T4.Common;
-using Air.CodeGeneration.DataBase;
+using Air.T4.Common.Host;
 using Air.Currency.Library;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 using Air.Currency.Library.Extension;
-using Air.T4.Common.Host;
 using Air.Data.Dto;
 using Air.Data.Model;
+using Air.Data.Attribute;
 
 namespace AirCodeGeneration
 {
@@ -68,6 +68,8 @@ namespace AirCodeGeneration
             List<TypeReflectDto> lstDto = new List<TypeReflectDto>();
             for (int i = 0; i < _lst_Types.Count; i++)
             {
+                if (_lst_Types[i].GetCustomAttribute<DataBaseTableRuleAttribute>().IsCreateGnore)
+                    continue;
                 TypeReflectDto item = new TypeReflectDto();
                 item.Sort = i + 1;
                 item.Name = _lst_Types[i].Name;
@@ -75,6 +77,7 @@ namespace AirCodeGeneration
                 item.IsSel = true;
                 lstDto.Add(item);
             }
+
             if (lstDto != null && lstDto.Count > 1)
             {
                 lstDto.Add(new TypeReflectDto()
@@ -118,57 +121,14 @@ namespace AirCodeGeneration
                     if (row.Cells["Col_Name"].Value.ToString() == "全选") continue;
                     if (row.Cells["Col_Sel"].Value.ToString() == "false") continue;
                     scriptFileName = row.Cells["Col_Name"].Value.ToString();
-                    Type t = _lst_Types.Find(p => p.Name == row.Cells["Col_Name"].Value.ToString());
-                    DatabaseTable table = new DatabaseTable();
-                    table.Name = t.Name;
-                    table.FieldItems = new List<DatabaseTableField>();
-
-                    List<PropertyInfo> lstField = t.GetProperties().Where(p =>
-                             p.GetAttribute<DisplayAttribute>() != null).ToList();
-                    foreach (var field in lstField)
-                    {
-                        DatabaseTableField tableField = new DatabaseTableField();
-                        DisplayAttribute attribute = field.GetAttribute<DisplayAttribute>();
-                        tableField.Name = attribute.Name ?? field.Name;
-                        if (!attribute.ShortName.IsNullOrWhiteSpace())
-                        {
-                            tableField.DataType = attribute.ShortName;
-                        }
-                        else  //系统自动推断生成
-                        {
-                            if (field.PropertyType.Name.ToLower().Contains("int"))
-                            {
-                                tableField.DataType = "int";
-                            }
-                            if (field.PropertyType.Name.ToLower().Contains("long"))
-                            {
-                                tableField.DataType = "bigint";
-                            }
-                            if (field.PropertyType.Name.ToLower().Contains("string"))
-                            {
-                                tableField.DataType = "varchar";
-                            }
-                            if (field.PropertyType.Name.ToLower().Contains("datetime"))
-                            {
-                                tableField.DataType = "datetime";
-                            }
-                            if (field.PropertyType.Name.ToLower().Contains("guid"))
-                            {
-                                tableField.DataType = "uniqueidentifier";
-                            }
-                        }
-                        if (!attribute.GroupName.IsNullOrWhiteSpace())
-                        {
-                            tableField.Constraint = attribute.GroupName;
-                        }
-                        table.FieldItems.Add(tableField);
-                    }
-                    database.TableItems.Add(table);
+                    string tableName = row.Cells["Col_Name"].Value.ToString();
+                     T4EngineHelper.SetDataBaseTableItems(tableName, database, _lst_Types);
+             
+ 
                 }
                 DataBaseHost host = new DataBaseHost(database);
-                
-                //BaseHost host = new BaseHost();
-                string output = Path.Combine( txt_Output.Text, scriptFileName+ ".sql");
+                 
+                string output = Path.Combine(txt_Output.Text, scriptFileName + ".sql");
                 T4EngineHelper.ProcessTemplate(t4FilePath, host, output, LogWrite);
             }
             catch (Exception ex)

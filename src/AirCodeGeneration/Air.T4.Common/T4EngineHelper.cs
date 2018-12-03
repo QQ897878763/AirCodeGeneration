@@ -1,10 +1,16 @@
 ﻿using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Air.Currency.Frame.Library;
+using Air.Currency.Frame.Library.Extension;
+using Air.Data.Attribute;
+using Air.Data.Model;
 using Air.T4.Common.Host;
 using Microsoft.VisualStudio.TextTemplating;
 
@@ -18,7 +24,6 @@ namespace Air.T4.Common
         /// </summary>
         public static readonly Engine Engine = new Engine();
 
-
         /// <summary>
         /// 根据模板生成代码
         /// </summary>
@@ -27,7 +32,7 @@ namespace Air.T4.Common
         /// <param name="logAction">日志记录函数</param>
         public static void ProcessTemplate(string templateFilePath, string outputPath = null, Action<string> logAction = null)
         {
-            
+
             var host = new BaseHost()
             {
                 TemplateFile = templateFilePath
@@ -90,6 +95,42 @@ namespace Air.T4.Common
             }
         }
 
+        /// <summary>
+        /// 写入数据表至Database对象
+        /// </summary>
+        /// <param name="tableName">数据表名称</param>
+        /// <param name="database">数据库对象</param>
+        /// <param name="lstTypes">C#类型集合</param>
+        /// <param name="logAction">日志委托</param>
+        public static void SetDataBaseTableItems(string tableName, Database database, List<Type> lstTypes, Action<string> logAction = null)
+        {
+            DatabaseTable table = new DatabaseTable();
+            Type t = lstTypes.Find(p => p.Name == tableName);
 
+            table.Name = t.Name;
+            table.FieldItems = new List<DatabaseTableField>();
+            table.FieldRuleItems = new List<DataBaseFieldRuleAttribute>();
+            DataBaseTableRuleAttribute attributeTable = t.GetCustomAttribute<DataBaseTableRuleAttribute>();
+            if (attributeTable.IsCreateGnore) return;
+
+            List<PropertyInfo> lstField = t.GetProperties()
+                .Where(p => p.GetCustomAttribute<DataBaseFieldRuleAttribute>() != null)
+                .ToList();
+            foreach (var field in lstField)
+            {
+                DataBaseFieldRuleAttribute attribute = field.GetAttribute<DataBaseFieldRuleAttribute>();
+                if (attribute.IsCreateGnore)
+                    continue;
+                if (attribute.Name.IsNullOrWhiteSpace())
+                    attribute.Name = field.Name;
+                if (attribute.DataType.IsNullOrWhiteSpace())
+                {
+                    logAction($"类型[{t.Name}]下的字段[{attribute.Name}]未指定数据类型!生成该类型的建表脚本失败!");
+                    continue;
+                }
+                table.FieldRuleItems.Add(attribute);
+            }
+            database.TableItems.Add(table);
+        }
     }
 }

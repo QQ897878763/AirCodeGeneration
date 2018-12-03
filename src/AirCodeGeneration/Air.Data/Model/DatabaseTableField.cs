@@ -26,6 +26,12 @@ namespace Air.Data.Model
         public string Constraint { get; set; }
 
         /// <summary>
+        /// 默认值
+        /// </summary>
+        public string DefaultValue { get; set; }
+
+
+        /// <summary>
         /// 字段备注
         /// </summary>
         public string Remark { get; set; }

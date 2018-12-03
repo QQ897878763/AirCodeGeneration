@@ -45,5 +45,11 @@
     <Compile Include="Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Air.Data\Air.Data.csproj">
+      <Project>{2c86c022-48e5-4c21-ad8b-cbefe4d4a51e}</Project>
+      <Name>Air.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

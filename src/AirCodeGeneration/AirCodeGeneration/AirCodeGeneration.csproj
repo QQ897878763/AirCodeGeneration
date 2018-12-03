@@ -251,10 +251,6 @@
       <Project>{2283403f-c89f-4a7d-9594-9d1103af61e2}</Project>
       <Name>Air.CodeGeneration.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Air.CodeGeneration.DataBase\Air.CodeGeneration.DataBase.csproj">
-      <Project>{cb08dc1a-13be-4aa3-9da4-8b90efcc2363}</Project>
-      <Name>Air.CodeGeneration.DataBase</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Air.Currency.Library\Air.Currency.Library.csproj">
       <Project>{a41522e5-f906-4afb-ab9b-0c9ee861b786}</Project>
       <Name>Air.Currency.Library</Name>

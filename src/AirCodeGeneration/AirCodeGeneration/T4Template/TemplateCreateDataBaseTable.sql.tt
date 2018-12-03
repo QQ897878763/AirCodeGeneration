@@ -15,12 +15,13 @@ USE  [<#=        databaseInfo.Name #>]
 -------------------------------Create Table <#=            databaseInfo.TableItems[i].Name #> ------------------------------------
      CREATE TABLE [dbo].[<#=            databaseInfo.TableItems[i].Name #>] 
      (
-<#        for(int k =0; k< databaseInfo.TableItems[i].FieldItems.Count;k++)
+<#        for(int k =0; k< databaseInfo.TableItems[i].FieldRuleItems.Count;k++)
         {
-            var item = databaseInfo.TableItems[i].FieldItems[k];
+            var item = databaseInfo.TableItems[i].FieldRuleItems[k];
             if(k!=0) //不为第一行则需要加逗号
-            {#>, <#            }#> <#=  item.Name #>  <#=                item.DataType #>  <#            if(item.Constraint!=null){#>  <#=     item.Constraint #> <#            }#> 
-      <#        }#>  
+            {#>, <#            }#> <#=                item.Name #>   <#=                item.DataType #> <#            if(!string.IsNullOrWhiteSpace(item.IdentityValue)){ #> <#=                    item.IdentityValue #> <#            }#><#            if(!string.IsNullOrWhiteSpace(item.Constraint)){ #> <#=                    item.Constraint #> <#            }#><#            if(!string.IsNullOrWhiteSpace(item.DefaultValue)){ #> <#=                    item.DefaultValue #> <#            }#> <#            if(item.IsPramaryKey){ #> Primary Key <#            } #>  --<#            if(!string.IsNullOrWhiteSpace(item.Remark)){ #> <#=                    item.Remark #><#            } #>
+    
+<#        }#>  
      )
 <#    }#>
 

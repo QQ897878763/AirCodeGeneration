@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Air.Data.Attribute;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -18,7 +19,12 @@ namespace Air.Data.Model
         /// <summary>
         /// 字段集合
         /// </summary>
-        public List<DatabaseTableField> FieldItems { get; set; }        
+        public List<DatabaseTableField> FieldItems { get; set; }
+
+        /// <summary>
+        /// 字段规格集合
+        /// </summary>
+        public List<DataBaseFieldRuleAttribute> FieldRuleItems { get; set; }
     }
      
 }

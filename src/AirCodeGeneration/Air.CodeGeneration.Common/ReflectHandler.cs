@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Data;
-using AirCodeGeneration.Data.Dto;
 using System.ComponentModel.DataAnnotations;
 using Air.Currency.Library;
 
