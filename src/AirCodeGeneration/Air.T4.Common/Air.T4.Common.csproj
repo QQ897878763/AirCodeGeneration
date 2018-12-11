@@ -191,7 +191,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Host\BaseHost.cs" />
+    <Compile Include="Host\DataBaseCoreHost.cs" />
     <Compile Include="Host\DataBaseHost.cs" />
+    <Compile Include="Model\Database\HostDatabase.cs" />
+    <Compile Include="Model\Database\HostDatabaseTable.cs" />
+    <Compile Include="Model\Database\HostDataBaseFieldRuleAttribute.cs" />
+    <Compile Include="Model\Database\HostDatabaseTableField.cs" />
     <Compile Include="T4EngineHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -207,6 +212,10 @@
     <ProjectReference Include="..\Air.Currency.Frame.Library\Air.Currency.Frame.Library.csproj">
       <Project>{b4c93802-b58c-4d5d-8040-d3160f1d7c98}</Project>
       <Name>Air.Currency.Frame.Library</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Air.Data.Core\Air.Data.Core.csproj">
+      <Project>{543b2daf-4c2e-4292-8c1b-4ad7afae48a9}</Project>
+      <Name>Air.Data.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Air.Data\Air.Data.csproj">
       <Project>{2C86C022-48E5-4C21-AD8B-CBEFE4D4A51E}</Project>

@@ -16,7 +16,7 @@ namespace AirCodeGeneration
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmSqlScript());
+            Application.Run(new FrmScriptCore());
         }
     }
 }

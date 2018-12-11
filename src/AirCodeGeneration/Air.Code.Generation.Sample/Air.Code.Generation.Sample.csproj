@@ -46,6 +46,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Air.Data.Core\Air.Data.Core.csproj">
+      <Project>{543b2daf-4c2e-4292-8c1b-4ad7afae48a9}</Project>
+      <Name>Air.Data.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Air.Data\Air.Data.csproj">
       <Project>{2c86c022-48e5-4c21-ad8b-cbefe4d4a51e}</Project>
       <Name>Air.Data</Name>

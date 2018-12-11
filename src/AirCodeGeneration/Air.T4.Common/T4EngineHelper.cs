@@ -13,6 +13,7 @@ using Air.Data.Attribute;
 using Air.Data.Model;
 using Air.T4.Common.Host;
 using Microsoft.VisualStudio.TextTemplating;
+ 
 
 namespace Air.T4.Common
 {
@@ -119,6 +120,45 @@ namespace Air.T4.Common
             foreach (var field in lstField)
             {
                 DataBaseFieldRuleAttribute attribute = field.GetAttribute<DataBaseFieldRuleAttribute>();
+                if (attribute.IsCreateGnore)
+                    continue;
+                if (attribute.Name.IsNullOrWhiteSpace())
+                    attribute.Name = field.Name;
+                if (attribute.DataType.IsNullOrWhiteSpace())
+                {
+                    logAction($"类型[{t.Name}]下的字段[{attribute.Name}]未指定数据类型!生成该类型的建表脚本失败!");
+                    continue;
+                }
+                table.FieldRuleItems.Add(attribute);
+            }
+            database.TableItems.Add(table);
+        }
+
+
+        /// <summary>
+        /// 写入数据表至Database对象
+        /// </summary>
+        /// <param name="tableName">数据表名称</param>
+        /// <param name="database">数据库对象</param>
+        /// <param name="lstTypes">C#类型集合</param>
+        /// <param name="logAction">日志委托</param>
+        public static void SetCoreDataBaseTableItems(string tableName, Air.Data.Core.Model.Database database, List<Type> lstTypes, Action<string> logAction = null)
+        {
+            Air.Data.Core.Model.DatabaseTable table = new Air.Data.Core.Model.DatabaseTable();
+            Type t = lstTypes.Find(p => p.Name == tableName);
+
+            table.Name = t.Name;
+            table.FieldItems = new List<Air.Data.Core.Model.DatabaseTableField>();
+            table.FieldRuleItems = new List<Air.Data.Core.Attribute.DataBaseFieldRuleAttribute>();
+            Air.Data.Core.Attribute.DataBaseTableRuleAttribute attributeTable = t.GetCustomAttribute<Air.Data.Core.Attribute.DataBaseTableRuleAttribute>();
+            if (attributeTable.IsCreateGnore) return;
+
+            List<PropertyInfo> lstField = t.GetProperties()
+                .Where(p => p.GetCustomAttribute<Air.Data.Core.Attribute.DataBaseFieldRuleAttribute>() != null)
+                .ToList();
+            foreach (var field in lstField)
+            {
+                Air.Data.Core.Attribute.DataBaseFieldRuleAttribute attribute = field.GetAttribute<Air.Data.Core.Attribute.DataBaseFieldRuleAttribute>();
                 if (attribute.IsCreateGnore)
                     continue;
                 if (attribute.Name.IsNullOrWhiteSpace())

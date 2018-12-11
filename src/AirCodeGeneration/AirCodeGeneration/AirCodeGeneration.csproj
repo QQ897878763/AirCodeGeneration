@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>AirCodeGeneration</RootNamespace>
     <AssemblyName>AirCodeGeneration</AssemblyName>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
@@ -187,16 +187,13 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
-    <Reference Include="WeifenLuo.WinFormsUI.Docking, Version=2.1.6643.41644, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\WeifenLuo.WinFormsUI.Docking.2.1.0\lib\net20\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="FrmScriptCore.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="FrmScriptCore.Designer.cs">
+      <DependentUpon>FrmScriptCore.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmSqlScript.cs">
       <SubType>Form</SubType>
@@ -213,8 +210,8 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="T4Template\CreateTable.txt" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="FrmScriptCore.resx">
+      <DependentUpon>FrmScriptCore.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmSqlScript.resx">
       <DependentUpon>FrmSqlScript.cs</DependentUpon>
@@ -251,13 +248,13 @@
       <Project>{2283403f-c89f-4a7d-9594-9d1103af61e2}</Project>
       <Name>Air.CodeGeneration.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Air.Currency.Library\Air.Currency.Library.csproj">
-      <Project>{a41522e5-f906-4afb-ab9b-0c9ee861b786}</Project>
-      <Name>Air.Currency.Library</Name>
+    <ProjectReference Include="..\Air.Currency.Frame.Library\Air.Currency.Frame.Library.csproj">
+      <Project>{b4c93802-b58c-4d5d-8040-d3160f1d7c98}</Project>
+      <Name>Air.Currency.Frame.Library</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Air.DataBaseManage\Air.DataBaseManage.csproj">
-      <Project>{73b7ad49-363f-4fd1-b058-768a26a5b5dc}</Project>
-      <Name>Air.DataBaseManage</Name>
+    <ProjectReference Include="..\Air.Data.Core\Air.Data.Core.csproj">
+      <Project>{543b2daf-4c2e-4292-8c1b-4ad7afae48a9}</Project>
+      <Name>Air.Data.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Air.Data\Air.Data.csproj">
       <Project>{2C86C022-48E5-4C21-AD8B-CBEFE4D4A51E}</Project>
@@ -267,16 +264,11 @@
       <Project>{bf55e749-80f9-4d18-b247-9d19dc85f139}</Project>
       <Name>Air.T4.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Air.WeifenLuo.WinFormsUI\Air.WeifenLuo.WinFormsUI.csproj">
-      <Project>{35e17bb7-a6bf-4810-af33-c817c97b3693}</Project>
-      <Name>Air.WeifenLuo.WinFormsUI</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AirCodeGeneration.Common\AirCodeGeneration.Common.csproj">
-      <Project>{0788ece9-bf52-4fd2-9d00-96b69b256cd3}</Project>
-      <Name>AirCodeGeneration.Common</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="T4Template\TemplateCoreCreateDataBaseTable.sql.tt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="T4Template\Test.tt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
