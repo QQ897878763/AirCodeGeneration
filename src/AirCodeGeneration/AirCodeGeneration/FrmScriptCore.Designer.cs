@@ -33,9 +33,14 @@
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.rich_Txt_Logs = new System.Windows.Forms.RichTextBox();
             this.dgv_Dll = new System.Windows.Forms.DataGridView();
+            this.Col_Sel = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Col_Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Col_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Col_ColumnCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tab_Details = new System.Windows.Forms.TabPage();
             this.tabControl_Pages = new System.Windows.Forms.TabControl();
             this.tab_Code = new System.Windows.Forms.TabPage();
+            this.rtb_Script = new System.Windows.Forms.RichTextBox();
             this.pan_Fill = new System.Windows.Forms.Panel();
             this.txt_DatabaseName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -47,13 +52,9 @@
             this.btn_SelectDLL = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.pan_Head = new System.Windows.Forms.Panel();
-            this.label4 = new System.Windows.Forms.Label();
             this.cmb_Platform = new System.Windows.Forms.ComboBox();
-            this.rtb_Script = new System.Windows.Forms.RichTextBox();
-            this.Col_Sel = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Col_Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Col_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Col_ColumnCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label4 = new System.Windows.Forms.Label();
+            this.btn_OpenFileDir = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Dll)).BeginInit();
             this.tab_Details.SuspendLayout();
             this.tabControl_Pages.SuspendLayout();
@@ -97,6 +98,34 @@
             this.dgv_Dll.Size = new System.Drawing.Size(1311, 446);
             this.dgv_Dll.TabIndex = 1;
             // 
+            // Col_Sel
+            // 
+            this.Col_Sel.DataPropertyName = "IsSel";
+            this.Col_Sel.HeaderText = "选择";
+            this.Col_Sel.Name = "Col_Sel";
+            this.Col_Sel.Width = 60;
+            // 
+            // Col_Number
+            // 
+            this.Col_Number.DataPropertyName = "Sort";
+            this.Col_Number.HeaderText = "序号";
+            this.Col_Number.Name = "Col_Number";
+            this.Col_Number.Width = 60;
+            // 
+            // Col_Name
+            // 
+            this.Col_Name.DataPropertyName = "Name";
+            this.Col_Name.HeaderText = "名称";
+            this.Col_Name.Name = "Col_Name";
+            this.Col_Name.Width = 200;
+            // 
+            // Col_ColumnCount
+            // 
+            this.Col_ColumnCount.DataPropertyName = "FieldCount";
+            this.Col_ColumnCount.HeaderText = "字段数";
+            this.Col_ColumnCount.Name = "Col_ColumnCount";
+            this.Col_ColumnCount.Width = 90;
+            // 
             // tab_Details
             // 
             this.tab_Details.Controls.Add(this.dgv_Dll);
@@ -134,6 +163,15 @@
             this.tab_Code.Text = "输出代码";
             this.tab_Code.UseVisualStyleBackColor = true;
             // 
+            // rtb_Script
+            // 
+            this.rtb_Script.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtb_Script.Location = new System.Drawing.Point(3, 4);
+            this.rtb_Script.Name = "rtb_Script";
+            this.rtb_Script.Size = new System.Drawing.Size(1311, 605);
+            this.rtb_Script.TabIndex = 0;
+            this.rtb_Script.Text = "";
+            // 
             // pan_Fill
             // 
             this.pan_Fill.Controls.Add(this.tabControl_Pages);
@@ -163,11 +201,13 @@
             // 
             // txt_Output
             // 
+            this.txt_Output.Enabled = false;
             this.txt_Output.Location = new System.Drawing.Point(127, 61);
             this.txt_Output.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txt_Output.Name = "txt_Output";
             this.txt_Output.Size = new System.Drawing.Size(1018, 28);
             this.txt_Output.TabIndex = 5;
+            this.txt_Output.Click += new System.EventHandler(this.txt_Output_Click);
             // 
             // label2
             // 
@@ -223,6 +263,7 @@
             // 
             // pan_Head
             // 
+            this.pan_Head.Controls.Add(this.btn_OpenFileDir);
             this.pan_Head.Controls.Add(this.cmb_Platform);
             this.pan_Head.Controls.Add(this.label4);
             this.pan_Head.Controls.Add(this.txt_DatabaseName);
@@ -240,6 +281,14 @@
             this.pan_Head.Size = new System.Drawing.Size(1325, 148);
             this.pan_Head.TabIndex = 2;
             // 
+            // cmb_Platform
+            // 
+            this.cmb_Platform.FormattingEnabled = true;
+            this.cmb_Platform.Location = new System.Drawing.Point(415, 108);
+            this.cmb_Platform.Name = "cmb_Platform";
+            this.cmb_Platform.Size = new System.Drawing.Size(158, 26);
+            this.cmb_Platform.TabIndex = 8;
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -249,51 +298,16 @@
             this.label4.TabIndex = 6;
             this.label4.Text = "DLL平台";
             // 
-            // cmb_Platform
+            // btn_OpenFileDir
             // 
-            this.cmb_Platform.FormattingEnabled = true;
-            this.cmb_Platform.Location = new System.Drawing.Point(415, 108);
-            this.cmb_Platform.Name = "cmb_Platform";
-            this.cmb_Platform.Size = new System.Drawing.Size(158, 26);
-            this.cmb_Platform.TabIndex = 8;
-            
-            // 
-            // rtb_Script
-            // 
-            this.rtb_Script.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtb_Script.Location = new System.Drawing.Point(3, 4);
-            this.rtb_Script.Name = "rtb_Script";
-            this.rtb_Script.Size = new System.Drawing.Size(1311, 605);
-            this.rtb_Script.TabIndex = 0;
-            this.rtb_Script.Text = "";
-            // 
-            // Col_Sel
-            // 
-            this.Col_Sel.DataPropertyName = "IsSel";
-            this.Col_Sel.HeaderText = "选择";
-            this.Col_Sel.Name = "Col_Sel";
-            this.Col_Sel.Width = 60;
-            // 
-            // Col_Number
-            // 
-            this.Col_Number.DataPropertyName = "Sort";
-            this.Col_Number.HeaderText = "序号";
-            this.Col_Number.Name = "Col_Number";
-            this.Col_Number.Width = 60;
-            // 
-            // Col_Name
-            // 
-            this.Col_Name.DataPropertyName = "Name";
-            this.Col_Name.HeaderText = "名称";
-            this.Col_Name.Name = "Col_Name";
-            this.Col_Name.Width = 200;
-            // 
-            // Col_ColumnCount
-            // 
-            this.Col_ColumnCount.DataPropertyName = "FieldCount";
-            this.Col_ColumnCount.HeaderText = "字段数";
-            this.Col_ColumnCount.Name = "Col_ColumnCount";
-            this.Col_ColumnCount.Width = 90;
+            this.btn_OpenFileDir.Location = new System.Drawing.Point(1172, 62);
+            this.btn_OpenFileDir.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btn_OpenFileDir.Name = "btn_OpenFileDir";
+            this.btn_OpenFileDir.Size = new System.Drawing.Size(129, 28);
+            this.btn_OpenFileDir.TabIndex = 9;
+            this.btn_OpenFileDir.Text = "打开输出目录";
+            this.btn_OpenFileDir.UseVisualStyleBackColor = true;
+            this.btn_OpenFileDir.Click += new System.EventHandler(this.btn_OpenFileDir_Click);
             // 
             // FrmScriptCore
             // 
@@ -343,5 +357,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Col_Number;
         private System.Windows.Forms.DataGridViewTextBoxColumn Col_Name;
         private System.Windows.Forms.DataGridViewTextBoxColumn Col_ColumnCount;
+        private System.Windows.Forms.Button btn_OpenFileDir;
     }
 }

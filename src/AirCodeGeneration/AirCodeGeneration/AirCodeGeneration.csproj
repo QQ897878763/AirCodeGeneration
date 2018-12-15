@@ -189,12 +189,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FrmMain.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrmMain.Designer.cs">
-      <DependentUpon>FrmMain.cs</DependentUpon>
-    </Compile>
     <Compile Include="FrmScriptCore.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -203,9 +197,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="FrmMain.resx">
-      <DependentUpon>FrmMain.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FrmScriptCore.resx">
       <DependentUpon>FrmScriptCore.cs</DependentUpon>
     </EmbeddedResource>

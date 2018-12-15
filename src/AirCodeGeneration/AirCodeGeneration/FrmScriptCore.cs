@@ -251,5 +251,15 @@ namespace AirCodeGeneration
                 }
             }
         }
+
+        private void btn_OpenFileDir_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("Explorer", $"{this.txt_Output.Text.Trim()}");
+        }
+
+        private void txt_Output_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("Explorer", $"{this.txt_Output.Text.Trim()}");
+        }
     }
 }

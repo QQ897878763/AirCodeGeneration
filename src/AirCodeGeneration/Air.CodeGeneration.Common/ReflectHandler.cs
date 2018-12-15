@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Data;
-using System.ComponentModel.DataAnnotations;
-using Air.Currency.Library;
 
 namespace Air.CodeGeneration.Common
 {
