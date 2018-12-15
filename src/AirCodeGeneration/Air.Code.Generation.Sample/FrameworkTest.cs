@@ -1,21 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Air.Data.Core.Attribute;
+using Air.Data.Attribute;
+
 
 namespace Air.Code.Generation.Sample
 {
-    [DataBaseTableRule(IsCreateGnore = false)]
-    public class Test
+    /// <summary>
+    /// Air.Data.Attribute特性方式测试(.NET Framework平台)
+    /// </summary>
+    public class FrameworkTest
     {
+        [DataBaseFieldRule(DataType = "Int", IdentityValue = "Identity(1,1)", IsPramaryKey = true, Remark = "主键")]
+        public int Id { get; set; }
 
-        [DataBaseFieldRule(DataType = "Int", IsPramaryKey = true, Remark = "主键")]
-        public Guid Id { get; set; }
-
-        [DataBaseFieldRule(DataType = "Int", IdentityValue = "Identity(1,1)", Constraint = "Not Null", Remark = "编码")]
+        [DataBaseFieldRule(DataType = "Int", Constraint = "Not Null", Remark = "编码")]
         public int Code { get; set; }
 
         [DataBaseFieldRule(DataType = "Varchar(20)", Constraint = "Not Null")]
