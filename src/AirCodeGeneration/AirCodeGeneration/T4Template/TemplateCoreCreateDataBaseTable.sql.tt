@@ -4,7 +4,7 @@
 <# 
    
     DataBaseCoreHost host = (DataBaseCoreHost)(Host); 
-    var databaseInfo=host._database;
+    var databaseInfo=host.Database;
 #> 
 
  

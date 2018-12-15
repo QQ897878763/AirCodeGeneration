@@ -1,9 +1,9 @@
 D:\Code\AirCodeGeneration\src\AirCodeGeneration\Air.Data.Core\bin\Debug\netstandard2.0\Air.Data.Core.deps.json
 D:\Code\AirCodeGeneration\src\AirCodeGeneration\Air.Data.Core\bin\Debug\netstandard2.0\Air.Data.Core.dll
 D:\Code\AirCodeGeneration\src\AirCodeGeneration\Air.Data.Core\bin\Debug\netstandard2.0\Air.Data.Core.pdb
-D:\Code\AirCodeGeneration\src\AirCodeGeneration\Air.Data.Core\obj\Debug\netstandard2.0\Air.Data.Core.csprojAssemblyReference.cache
 D:\Code\AirCodeGeneration\src\AirCodeGeneration\Air.Data.Core\obj\Debug\netstandard2.0\Air.Data.Core.csproj.CoreCompileInputs.cache
 D:\Code\AirCodeGeneration\src\AirCodeGeneration\Air.Data.Core\obj\Debug\netstandard2.0\Air.Data.Core.AssemblyInfoInputs.cache
 D:\Code\AirCodeGeneration\src\AirCodeGeneration\Air.Data.Core\obj\Debug\netstandard2.0\Air.Data.Core.AssemblyInfo.cs
 D:\Code\AirCodeGeneration\src\AirCodeGeneration\Air.Data.Core\obj\Debug\netstandard2.0\Air.Data.Core.dll
 D:\Code\AirCodeGeneration\src\AirCodeGeneration\Air.Data.Core\obj\Debug\netstandard2.0\Air.Data.Core.pdb
+D:\Code\AirCodeGeneration\src\AirCodeGeneration\Air.Data.Core\obj\Debug\netstandard2.0\Air.Data.Core.csprojAssemblyReference.cache

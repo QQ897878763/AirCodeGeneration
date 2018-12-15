@@ -189,25 +189,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FrmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmMain.Designer.cs">
+      <DependentUpon>FrmMain.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmScriptCore.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmScriptCore.Designer.cs">
       <DependentUpon>FrmScriptCore.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmSqlScript.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrmSqlScript.Designer.cs">
-      <DependentUpon>FrmSqlScript.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FrmMain.resx">
+      <DependentUpon>FrmMain.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmScriptCore.resx">
       <DependentUpon>FrmScriptCore.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FrmSqlScript.resx">
-      <DependentUpon>FrmSqlScript.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -234,6 +234,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Air.Code.Generation.Sample\Air.Code.Generation.Sample.csproj">
+      <Project>{9759aa2c-589a-42a8-aeca-5e642a4e67e6}</Project>
+      <Name>Air.Code.Generation.Sample</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Air.CodeGeneration.Common\Air.CodeGeneration.Common.csproj">
       <Project>{2283403f-c89f-4a7d-9594-9d1103af61e2}</Project>
       <Name>Air.CodeGeneration.Common</Name>

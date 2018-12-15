@@ -192,7 +192,6 @@
   <ItemGroup>
     <Compile Include="Host\BaseHost.cs" />
     <Compile Include="Host\DataBaseCoreHost.cs" />
-    <Compile Include="Host\DataBaseHost.cs" />
     <Compile Include="Model\Database\HostDatabase.cs" />
     <Compile Include="Model\Database\HostDatabaseTable.cs" />
     <Compile Include="Model\Database\HostDataBaseFieldRuleAttribute.cs" />
@@ -209,6 +208,10 @@
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.2.6.1\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Air.CodeGeneration.Common\Air.CodeGeneration.Common.csproj">
+      <Project>{2283403F-C89F-4A7D-9594-9D1103AF61E2}</Project>
+      <Name>Air.CodeGeneration.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Air.Currency.Frame.Library\Air.Currency.Frame.Library.csproj">
       <Project>{b4c93802-b58c-4d5d-8040-d3160f1d7c98}</Project>
       <Name>Air.Currency.Frame.Library</Name>

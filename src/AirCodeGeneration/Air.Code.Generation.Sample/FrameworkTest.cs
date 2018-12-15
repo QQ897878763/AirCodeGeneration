@@ -11,6 +11,7 @@ namespace Air.Code.Generation.Sample
     /// <summary>
     /// Air.Data.Attribute特性方式测试(.NET Framework平台)
     /// </summary>
+    [DataBaseTableRule(IsCreateGnore = false)]
     public class FrameworkTest
     {
         [DataBaseFieldRule(DataType = "Int", IdentityValue = "Identity(1,1)", IsPramaryKey = true, Remark = "主键")]

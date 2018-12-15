@@ -9,6 +9,8 @@ namespace Air.CodeGeneration.Common
 {
     public static class AutoMapperExtensios
     {
+
+
         /// <summary>
         /// 将源对象映射到目标对象
         /// </summary>
@@ -74,8 +76,9 @@ namespace Air.CodeGeneration.Common
                     config.CreateMap(sourceType, destinationType);
                 });
             }
-            catch (InvalidOperationException)
+            catch (InvalidOperationException ex)
             {
+                AutoMapper.Mapper.Reset();
                 AutoMapper.Mapper.Initialize(config =>
                 {
                     config.CreateMap(sourceType, destinationType);

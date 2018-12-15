@@ -2,18 +2,21 @@
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Air.CodeGeneration.Common;
 using Air.Currency.Frame.Library;
 using Air.Currency.Frame.Library.Extension;
 using Air.Data.Attribute;
+using Air.Data.Core.Dto;
 using Air.Data.Model;
 using Air.T4.Common.Host;
 using Microsoft.VisualStudio.TextTemplating;
- 
+
 
 namespace Air.T4.Common
 {
@@ -61,7 +64,7 @@ namespace Air.T4.Common
         /// <param name="host">The host<see cref="T"/></param>
         /// <param name="outputPath">The outputPath<see cref="string"/></param>
         /// <param name="logAction">The logAction<see cref="Action{string}"/></param>
-        public static void ProcessTemplate<T>(string templateFilePath = null, T host = null,
+        public static string ProcessTemplate<T>(string templateFilePath = null, T host = null,
             string outputPath = null, Action<string> logAction = null)
             where T : BaseHost
         {
@@ -81,7 +84,7 @@ namespace Air.T4.Common
             }
             File.WriteAllText(outputPath, output, host.FileEncoding);
 
-            if (logAction == null) return;
+            if (logAction == null) return output;
             if (host.Errors?.Count > 0)
             {
                 foreach (CompilerError error in host.Errors)
@@ -94,6 +97,7 @@ namespace Air.T4.Common
             {
                 logAction(output);
             }
+            return output;
         }
 
         /// <summary>
@@ -151,6 +155,7 @@ namespace Air.T4.Common
             table.FieldItems = new List<Air.Data.Core.Model.DatabaseTableField>();
             table.FieldRuleItems = new List<Air.Data.Core.Attribute.DataBaseFieldRuleAttribute>();
             Air.Data.Core.Attribute.DataBaseTableRuleAttribute attributeTable = t.GetCustomAttribute<Air.Data.Core.Attribute.DataBaseTableRuleAttribute>();
+            if (attributeTable == null) return;
             if (attributeTable.IsCreateGnore) return;
 
             List<PropertyInfo> lstField = t.GetProperties()
@@ -171,6 +176,60 @@ namespace Air.T4.Common
                 table.FieldRuleItems.Add(attribute);
             }
             database.TableItems.Add(table);
+        }
+
+
+        /// <summary>
+        /// 获取反射DLL后的类型集合DataTable
+        /// </summary>
+        /// <param name="assemblyPath"></param>
+        /// <param name="lstTypes"></param>
+        /// <param name="platform"></param>
+        /// <returns></returns>
+        public static DataTable GetTypeDataTable(string assemblyPath, ref List<Type> lstTypes, int platform = 1)
+        {
+            DataTable dt = new DataTable();
+            lstTypes = ReflectHandler.GetTypeList(assemblyPath);
+            List<TypeReflectDto> lstDto = new List<TypeReflectDto>();
+            if (platform != 1 && platform != 2)
+            {
+                throw new Exception($"无效的入参[{nameof(platform)}]");
+            }
+            for (int i = 0; i < lstTypes.Count; i++)
+            {
+                if (platform == 1)
+                {
+                    Data.Core.Attribute.DataBaseTableRuleAttribute attr = lstTypes[i].GetCustomAttribute<Data.Core.Attribute.DataBaseTableRuleAttribute>();
+                    if (attr == null) continue;
+                    if (attr.IsCreateGnore) continue;
+                }
+                if (platform == 2)
+                {
+                    Air.Data.Attribute.DataBaseTableRuleAttribute attr = lstTypes[i].GetCustomAttribute<Air.Data.Attribute.DataBaseTableRuleAttribute>();
+                    if (attr == null) continue;
+                    if (attr.IsCreateGnore) continue;
+                }
+                TypeReflectDto item = new TypeReflectDto();
+                item.Sort = i + 1;
+                item.Name = lstTypes[i].Name;
+                item.FieldCount = lstTypes[i].GetProperties().Count().ToString();
+                item.IsSel = true;
+                lstDto.Add(item);
+            }
+
+            if (lstDto != null && lstDto.Count > 1)
+            {
+                lstDto.Add(new TypeReflectDto()
+                {
+                    FieldCount = "",
+                    IsSel = true,
+                    Sort = lstDto.Count + 1,
+                    Name = "全选"
+                });
+            }
+
+            dt = lstDto.ToDataTable();
+            return dt;
         }
     }
 }

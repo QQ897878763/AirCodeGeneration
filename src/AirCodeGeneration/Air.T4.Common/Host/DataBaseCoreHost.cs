@@ -17,11 +17,11 @@ namespace Air.T4.Common.Host
         /// <summary>
         /// 数据库信息
         /// </summary>
-        public readonly HostDatabase _database;
+        public readonly HostDatabase Database;
 
         public DataBaseCoreHost(HostDatabase database)
         {
-            _database = database;
+            Database = database;
 
         }
 
@@ -73,7 +73,6 @@ namespace Air.T4.Common.Host
                     typeof(Uri).Assembly.Location,
                     typeof(BaseHost).Assembly.Location,
                     typeof(ParallelExecutionMode).Assembly.Location,
-                    typeof(DataBaseHost).Assembly.Location,
                     typeof(HostDatabase).Assembly.Location,
                     typeof(List<>).Assembly.Location,
                 };

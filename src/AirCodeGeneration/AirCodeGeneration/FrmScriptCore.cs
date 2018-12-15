@@ -24,7 +24,7 @@ namespace AirCodeGeneration
     public partial class FrmScriptCore : Form
     {
         private DataTable _dt_Models;
-        private List<Type> _lst_Types;
+        private List<Type> _lst_Types = null;
         public FrmScriptCore()
         {
             InitializeComponent();
@@ -35,6 +35,28 @@ namespace AirCodeGeneration
         {
             string output = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "Output");
             this.txt_Output.Text = output;
+            SetCmbData();
+        }
+
+        private void SetCmbData()
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add(new DataColumn("Id", typeof(Int32)));
+            dt.Columns.Add(new DataColumn("Name", typeof(string)));
+            DataRow dr = dt.NewRow();
+            dr["Id"] = 1;
+            dr["Name"] = ".Net Standard";
+            dt.Rows.Add(dr);
+            dr = dt.NewRow();
+            dr["Id"] = 2;
+            dr["Name"] = "Framework";
+            dt.Rows.Add(dr);
+
+            cmb_Platform.DataSource = dt;
+            cmb_Platform.ValueMember = "Id";
+            cmb_Platform.DisplayMember = "Name";
+            cmb_Platform.SelectedIndex = 1;
+            this.cmb_Platform.SelectedValueChanged += new System.EventHandler(this.cmb_Platform_SelectedValueChanged);
         }
 
         /// <summary>
@@ -44,53 +66,7 @@ namespace AirCodeGeneration
         /// <param name="e"></param>
         private void btn_SelectDLL_Click(object sender, EventArgs e)
         {
-            using (OpenFileDialog dlgText = new OpenFileDialog())
-            {
-                dlgText.Filter = "|*.dll";
-                if (dlgText.ShowDialog() == DialogResult.OK)
-                {
-                    txt_DllFilePath.Text = dlgText.FileName;
-                    _dt_Models = GetTypeDataTable(dlgText.FileName);
-                    this.dgv_Dll.DataSource = _dt_Models;
-                }
-            }
-        }
-
-        /// <summary>
-        /// 获取反射DLL后的类型集合DataTable
-        /// </summary>
-        /// <param name="assemblyPath">字符集路径</param>
-        /// <returns></returns>
-        private DataTable GetTypeDataTable(string assemblyPath)
-        {
-            DataTable dt = new DataTable();
-            _lst_Types = ReflectHandler.GetTypeList(assemblyPath);
-            List<TypeReflectDto> lstDto = new List<TypeReflectDto>();
-            for (int i = 0; i < _lst_Types.Count; i++)
-            {
-                if (_lst_Types[i].GetCustomAttribute<DataBaseTableRuleAttribute>().IsCreateGnore)
-                    continue;
-                TypeReflectDto item = new TypeReflectDto();
-                item.Sort = i + 1;
-                item.Name = _lst_Types[i].Name;
-                item.FieldCount = _lst_Types[i].GetProperties().Count().ToString();
-                item.IsSel = true;
-                lstDto.Add(item);
-            }
-
-            if (lstDto != null && lstDto.Count > 1)
-            {
-                lstDto.Add(new TypeReflectDto()
-                {
-                    FieldCount = "",
-                    IsSel = true,
-                    Sort = lstDto.Count + 1,
-                    Name = "全选"
-                });
-            }
-
-            dt = lstDto.ToDataTable();
-            return dt;
+            LoadDLL();
         }
 
         /// <summary>
@@ -107,35 +83,79 @@ namespace AirCodeGeneration
                     MessageBox.Show("没有可生成脚本的DLL!");
                     return;
                 }
-
-                //需要选择T4模板进行导出脚本
-                string t4FilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "T4Template", "TemplateCoreCreateDataBaseTable.sql.tt");
-                Database database = new Database()
+                if (cmb_Platform.SelectedValue == null)
                 {
-                    Name = txt_DatabaseName.Text
-                };
-                database.TableItems = new List<DatabaseTable>();
-                string scriptFileName = string.Empty;
-                foreach (DataGridViewRow row in dgv_Dll.Rows)
-                {
-                    if (row.Cells["Col_Name"].Value.ToString() == "全选") continue;
-                    if (row.Cells["Col_Sel"].Value.ToString() == "false") continue;
-                    scriptFileName = row.Cells["Col_Name"].Value.ToString();
-                    string tableName = row.Cells["Col_Name"].Value.ToString();
-                    T4EngineHelper.SetCoreDataBaseTableItems(tableName, database, _lst_Types);
+                    MessageBox.Show("请选择DLL平台");
+                    return;
                 }
-                HostDatabase hostDatabase = new HostDatabase();
-                hostDatabase.Name = txt_DatabaseName.Text;
-                hostDatabase.TableItems = database.TableItems.MapTo(new List<HostDatabaseTable>());
-                DataBaseCoreHost host = new DataBaseCoreHost(hostDatabase);
+                if ((int)(cmb_Platform.SelectedValue) == 1)
+                {
+                    WriteNetCoreScript();
+                }
+                else
+                {
+                    WriteFrameworkScript();
+                }
 
-                string output = Path.Combine(txt_Output.Text, scriptFileName + ".sql");
-                T4EngineHelper.ProcessTemplate(t4FilePath, host, output, LogWrite);
             }
             catch (Exception ex)
             {
                 LogWrite(ex.Message);
             }
+        }
+
+        private void WriteNetCoreScript()
+        {
+            //需要选择T4模板进行导出脚本
+            string t4FilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "T4Template", "TemplateCoreCreateDataBaseTable.sql.tt");
+            Database database = new Database()
+            {
+                Name = txt_DatabaseName.Text
+            };
+            database.TableItems = new List<DatabaseTable>();
+            string scriptFileName = string.Empty;
+            foreach (DataGridViewRow row in dgv_Dll.Rows)
+            {
+                if (row.Cells["Col_Name"].Value.ToString() == "全选") continue;
+                if (row.Cells["Col_Sel"].Value.ToString() == "false") continue;
+                scriptFileName = row.Cells["Col_Name"].Value.ToString();
+                string tableName = row.Cells["Col_Name"].Value.ToString();
+                T4EngineHelper.SetCoreDataBaseTableItems(tableName, database, _lst_Types);
+            }
+            if (database.TableItems.Count <= 0) return;
+            HostDatabase hostDatabase = new HostDatabase();
+            hostDatabase.Name = txt_DatabaseName.Text;
+            hostDatabase.TableItems = database.TableItems.MapTo(new List<HostDatabaseTable>());
+            DataBaseCoreHost host = new DataBaseCoreHost(hostDatabase);
+            string output = Path.Combine(txt_Output.Text, scriptFileName + ".sql");
+            rtb_Script.Text = T4EngineHelper.ProcessTemplate(t4FilePath, host, output, LogWrite);
+        }
+
+        private void WriteFrameworkScript()
+        {
+            //需要选择T4模板进行导出脚本
+            string t4FilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "T4Template", "TemplateCreateDataBaseTable.sql.tt");
+            Air.Data.Model.Database database = new Air.Data.Model.Database()
+            {
+                Name = txt_DatabaseName.Text
+            };
+            database.TableItems = new List<Air.Data.Model.DatabaseTable>();
+            string scriptFileName = string.Empty;
+            foreach (DataGridViewRow row in dgv_Dll.Rows)
+            {
+                if (row.Cells["Col_Name"].Value.ToString() == "全选") continue;
+                if (row.Cells["Col_Sel"].Value.ToString() == "false") continue;
+                scriptFileName = row.Cells["Col_Name"].Value.ToString();
+                string tableName = row.Cells["Col_Name"].Value.ToString();
+                T4EngineHelper.SetDataBaseTableItems(tableName, database, _lst_Types);
+            }
+            if (database.TableItems.Count <= 0) return;
+            HostDatabase hostDatabase = new HostDatabase();
+            hostDatabase.Name = txt_DatabaseName.Text;
+            hostDatabase.TableItems = database.TableItems.MapTo(new List<HostDatabaseTable>());
+            DataBaseCoreHost host = new DataBaseCoreHost(hostDatabase);
+            string output = Path.Combine(txt_Output.Text, scriptFileName + ".sql");
+            rtb_Script.Text = T4EngineHelper.ProcessTemplate(t4FilePath, host, output, LogWrite);
         }
 
         private void LogWrite(string logValue)
@@ -144,6 +164,34 @@ namespace AirCodeGeneration
             {
                 this.rich_Txt_Logs.Text = string.Concat(Environment.NewLine, logValue);
             }));
+        }
+
+        private void cmb_Platform_SelectedValueChanged(object sender, EventArgs e)
+        {
+            //需要重新加载DLL
+            if (string.IsNullOrWhiteSpace(txt_DllFilePath.Text)) return;
+            _lst_Types = null;
+            _dt_Models = T4EngineHelper.GetTypeDataTable(txt_DllFilePath.Text, ref _lst_Types, (int)cmb_Platform.SelectedValue);
+            this.dgv_Dll.DataSource = _dt_Models;
+        }
+
+        private void LoadDLL()
+        {
+            if (cmb_Platform.SelectedValue == null)
+            {
+                MessageBox.Show("请选择DLL平台");
+                return;
+            }
+            using (OpenFileDialog dlgText = new OpenFileDialog())
+            {
+                dlgText.Filter = "|*.dll";
+                if (dlgText.ShowDialog() == DialogResult.OK)
+                {
+                    txt_DllFilePath.Text = dlgText.FileName;
+                    _dt_Models = T4EngineHelper.GetTypeDataTable(dlgText.FileName, ref _lst_Types, (int)cmb_Platform.SelectedValue);
+                    this.dgv_Dll.DataSource = _dt_Models;
+                }
+            }
         }
     }
 }

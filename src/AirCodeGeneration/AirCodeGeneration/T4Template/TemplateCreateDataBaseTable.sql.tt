@@ -2,7 +2,7 @@
 <#@ output extension=".cs" #>
 
 <# 
-    DataBaseHost host = (DataBaseHost)(Host); 
+    DataBaseCoreHost host = (DataBaseCoreHost)(Host); 
     var databaseInfo=host.Database;
 #> 
 
