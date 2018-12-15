@@ -10,21 +10,7 @@ using AutoMapper;
 namespace Air.CodeGeneration.Common
 {
     public class AutofacConfig
-    {
-
-        ///// <summary>
-        ///// Scan all referenced assemblies to retrieve all `Profile` types.
-        ///// </summary>
-        ///// <returns>A collection of <see cref="AutoMapper.Profile"/> types.</returns>
-        //private static List<Type> RetrieveProfiles()
-        //{
-        //    var assemblyNames = Assembly.GetExecutingAssembly().GetReferencedAssemblies()
-        //        .Where(a => a.Name.StartsWith("Some"));
-        //    var assemblies = assemblyNames.Select(an => Assembly.Load(an));
-        //    var loadedProfiles = ExtractProfiles(assemblies);
-        //    return loadedProfiles;
-        //}
-
+    { 
         private static List<Type> RetrieveProfiles(List<Assembly> assemblieLst)
         {
             var loadedProfiles = ExtractProfiles(assemblieLst);
@@ -53,7 +39,7 @@ namespace Air.CodeGeneration.Common
 
         public static void RegisterAutoMapper(IContainer container, IEnumerable<Type> loadedProfiles)
         {
-            AutoMapper.Mapper.Initialize(cfg =>
+            Mapper.Initialize(cfg =>
             {
                 cfg.ConstructServicesUsing(container.Resolve);
                 foreach (var profile in loadedProfiles)
