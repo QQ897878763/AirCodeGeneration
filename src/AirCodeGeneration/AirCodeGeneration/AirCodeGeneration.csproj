@@ -260,15 +260,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="T4Template\TemplateCoreCreateDataBaseTable.sql.tt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="T4Template\TemplateCreateDataBaseTable.sql.tt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <FormatOutput>False</FormatOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

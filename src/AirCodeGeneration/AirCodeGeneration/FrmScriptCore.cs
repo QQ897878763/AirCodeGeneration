@@ -88,15 +88,14 @@ namespace AirCodeGeneration
                     MessageBox.Show("请选择DLL平台");
                     return;
                 }
-                if ((int)(cmb_Platform.SelectedValue) == 1)
+                if (string.IsNullOrWhiteSpace(txt_DatabaseName.Text))
                 {
-                    WriteNetCoreScript();
-                }
-                else
-                {
-                    WriteFrameworkScript();
+                    if (MessageBox.Show("检测到您未填写数据库名称，是否继续生成脚本文件?", "询问", MessageBoxButtons.YesNo) == DialogResult.No)
+                        return;
                 }
 
+                int platform = (int)(cmb_Platform.SelectedValue);
+                WriteCreateDBTableScript(platform);
             }
             catch (Exception ex)
             {
@@ -104,59 +103,118 @@ namespace AirCodeGeneration
             }
         }
 
-        private void WriteNetCoreScript()
+        /// <summary>
+        /// 写入脚本
+        /// </summary>
+        /// <param name="platform"></param>
+        private void WriteCreateDBTableScript(int platform = 1)
         {
-            //需要选择T4模板进行导出脚本
-            string t4FilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "T4Template", "TemplateCoreCreateDataBaseTable.sql.tt");
-            Database database = new Database()
-            {
-                Name = txt_DatabaseName.Text
-            };
-            database.TableItems = new List<DatabaseTable>();
-            string scriptFileName = string.Empty;
-            foreach (DataGridViewRow row in dgv_Dll.Rows)
-            {
-                if (row.Cells["Col_Name"].Value.ToString() == "全选") continue;
-                if (row.Cells["Col_Sel"].Value.ToString() == "false") continue;
-                scriptFileName = row.Cells["Col_Name"].Value.ToString();
-                string tableName = row.Cells["Col_Name"].Value.ToString();
-                T4EngineHelper.SetCoreDataBaseTableItems(tableName, database, _lst_Types);
-            }
-            if (database.TableItems.Count <= 0) return;
+            string t4FilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, T4Consts.FILE_Folder, T4Consts.DB_TABLE_CREATE_FILE_NAME);
             HostDatabase hostDatabase = new HostDatabase();
             hostDatabase.Name = txt_DatabaseName.Text;
-            hostDatabase.TableItems = database.TableItems.MapTo(new List<HostDatabaseTable>());
             DataBaseCoreHost host = new DataBaseCoreHost(hostDatabase);
+            string scriptFileName = string.Empty;
+
+            switch (platform)
+            {
+                case 1: //.Net Standard
+                    {
+                        Air.Data.Core.Model.Database database = new Air.Data.Core.Model.Database()
+                        {
+                            Name = txt_DatabaseName.Text
+                        };
+                        database.TableItems = new List<DatabaseTable>();
+                        foreach (DataGridViewRow row in dgv_Dll.Rows)
+                        {
+                            if (row.Cells["Col_Name"].Value.ToString() == "全选") continue;
+                            if (row.Cells["Col_Sel"].Value.ToString() == "false") continue;
+                            scriptFileName = row.Cells["Col_Name"].Value.ToString();
+                            string tableName = row.Cells["Col_Name"].Value.ToString();
+                            T4EngineHelper.SetCoreDataBaseTableItems(tableName, database, _lst_Types);
+                        }
+                        if (database.TableItems.Count <= 0) return;
+                        hostDatabase.TableItems = database.TableItems.MapTo(new List<HostDatabaseTable>());
+                        break;
+                    }
+                case 2:  //Framework
+                    {
+                        Air.Data.Model.Database database = new Air.Data.Model.Database()
+                        {
+                            Name = txt_DatabaseName.Text
+                        };
+                        database.TableItems = new List<Air.Data.Model.DatabaseTable>();
+                        foreach (DataGridViewRow row in dgv_Dll.Rows)
+                        {
+                            if (row.Cells["Col_Name"].Value.ToString() == "全选") continue;
+                            if (row.Cells["Col_Sel"].Value.ToString() == "false") continue;
+                            scriptFileName = row.Cells["Col_Name"].Value.ToString();
+                            string tableName = row.Cells["Col_Name"].Value.ToString();
+                            T4EngineHelper.SetDataBaseTableItems(tableName, database, _lst_Types);
+                        }
+                        if (database.TableItems.Count <= 0) return;
+                        hostDatabase.TableItems = database.TableItems.MapTo(new List<HostDatabaseTable>());
+                        break;
+                    }
+                default:
+                    throw new Exception($"参数[{nameof(platform)}]值有误!");
+            }
             string output = Path.Combine(txt_Output.Text, scriptFileName + ".sql");
             rtb_Script.Text = T4EngineHelper.ProcessTemplate(t4FilePath, host, output, LogWrite);
         }
 
-        private void WriteFrameworkScript()
-        {
-            //需要选择T4模板进行导出脚本
-            string t4FilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "T4Template", "TemplateCreateDataBaseTable.sql.tt");
-            Air.Data.Model.Database database = new Air.Data.Model.Database()
-            {
-                Name = txt_DatabaseName.Text
-            };
-            database.TableItems = new List<Air.Data.Model.DatabaseTable>();
-            string scriptFileName = string.Empty;
-            foreach (DataGridViewRow row in dgv_Dll.Rows)
-            {
-                if (row.Cells["Col_Name"].Value.ToString() == "全选") continue;
-                if (row.Cells["Col_Sel"].Value.ToString() == "false") continue;
-                scriptFileName = row.Cells["Col_Name"].Value.ToString();
-                string tableName = row.Cells["Col_Name"].Value.ToString();
-                T4EngineHelper.SetDataBaseTableItems(tableName, database, _lst_Types);
-            }
-            if (database.TableItems.Count <= 0) return;
-            HostDatabase hostDatabase = new HostDatabase();
-            hostDatabase.Name = txt_DatabaseName.Text;
-            hostDatabase.TableItems = database.TableItems.MapTo(new List<HostDatabaseTable>());
-            DataBaseCoreHost host = new DataBaseCoreHost(hostDatabase);
-            string output = Path.Combine(txt_Output.Text, scriptFileName + ".sql");
-            rtb_Script.Text = T4EngineHelper.ProcessTemplate(t4FilePath, host, output, LogWrite);
-        }
+        //private void WriteNetCoreScript()
+        //{
+        //    //需要选择T4模板进行导出脚本
+        //    string t4FilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, T4Consts.FILE_Folder, T4Consts.DB_TABLE_CREATE_FILE_NAME);
+        //    Air.Data.Core.Model.Database database = new Air.Data.Core.Model.Database()
+        //    {
+        //        Name = txt_DatabaseName.Text
+        //    };
+        //    database.TableItems = new List<DatabaseTable>();
+        //    string scriptFileName = string.Empty;
+        //    foreach (DataGridViewRow row in dgv_Dll.Rows)
+        //    {
+        //        if (row.Cells["Col_Name"].Value.ToString() == "全选") continue;
+        //        if (row.Cells["Col_Sel"].Value.ToString() == "false") continue;
+        //        scriptFileName = row.Cells["Col_Name"].Value.ToString();
+        //        string tableName = row.Cells["Col_Name"].Value.ToString();
+        //        T4EngineHelper.SetCoreDataBaseTableItems(tableName, database, _lst_Types);
+        //    }
+        //    if (database.TableItems.Count <= 0) return;
+        //    HostDatabase hostDatabase = new HostDatabase();
+        //    hostDatabase.Name = txt_DatabaseName.Text;
+        //    hostDatabase.TableItems = database.TableItems.MapTo(new List<HostDatabaseTable>());
+        //    DataBaseCoreHost host = new DataBaseCoreHost(hostDatabase);
+        //    string output = Path.Combine(txt_Output.Text, scriptFileName + ".sql");
+        //    rtb_Script.Text = T4EngineHelper.ProcessTemplate(t4FilePath, host, output, LogWrite);
+        //}
+
+        //private void WriteFrameworkScript()
+        //{
+        //    //需要选择T4模板进行导出脚本
+        //    string t4FilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, T4Consts.FILE_Folder, T4Consts.DB_TABLE_CREATE_FILE_NAME);
+        //    Air.Data.Model.Database database = new Air.Data.Model.Database()
+        //    {
+        //        Name = txt_DatabaseName.Text
+        //    };
+        //    database.TableItems = new List<Air.Data.Model.DatabaseTable>();
+        //    string scriptFileName = string.Empty;
+        //    foreach (DataGridViewRow row in dgv_Dll.Rows)
+        //    {
+        //        if (row.Cells["Col_Name"].Value.ToString() == "全选") continue;
+        //        if (row.Cells["Col_Sel"].Value.ToString() == "false") continue;
+        //        scriptFileName = row.Cells["Col_Name"].Value.ToString();
+        //        string tableName = row.Cells["Col_Name"].Value.ToString();
+        //        T4EngineHelper.SetDataBaseTableItems(tableName, database, _lst_Types);
+        //    }
+        //    if (database.TableItems.Count <= 0) return;
+        //    HostDatabase hostDatabase = new HostDatabase();
+        //    hostDatabase.Name = txt_DatabaseName.Text;
+        //    hostDatabase.TableItems = database.TableItems.MapTo(new List<HostDatabaseTable>());
+        //    DataBaseCoreHost host = new DataBaseCoreHost(hostDatabase);
+        //    string output = Path.Combine(txt_Output.Text, scriptFileName + ".sql");
+        //    rtb_Script.Text = T4EngineHelper.ProcessTemplate(t4FilePath, host, output, LogWrite);
+        //}
 
         private void LogWrite(string logValue)
         {
