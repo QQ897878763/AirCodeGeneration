@@ -12,7 +12,7 @@
 > SQL Server
 
 ### 使用方式
-1、Framework平台引用Air.Data,NetCore和NET Standard引用Air.Data.Core
+1、Framework平台引用Air.Data,NetCore和NET Standard引用Air.Data.Core <br>
 2、模型类的代码请参考下面代码
 ```
   [DataBaseTableRule(IsCreateGnore = false)]
