@@ -30,8 +30,6 @@ namespace AirCodeGeneration
             //实例化Autofac容器
             var builder = new ContainerBuilder();
             //Autofac注册对象
-            //List<Assembly> assemblies = AppDomain.CurrentDomain.GetAssemblies()
-            //.Where(p => p.FullName.StartsWith("Air")).ToList();
             List<Assembly> assemblies = new List<Assembly>();
             //获取程序依赖的程序集名称集合
             var assemblyNameLst = Assembly.GetEntryAssembly().GetReferencedAssemblies();
@@ -41,9 +39,7 @@ namespace AirCodeGeneration
                 if (assName.Name.StartsWith("Air"))
                     assemblies.Add(Assembly.Load(assName));
             }
-            var loadedProfiles = AutofacConfig.RegisterObj(builder, assemblies);
-            ContainerManager.Container = builder.Build();
-            AutofacConfig.RegisterAutoMapper(ContainerManager.Container, loadedProfiles);
+            AutofacConfig.RegisterObj(builder, assemblies);
         }
 
     }

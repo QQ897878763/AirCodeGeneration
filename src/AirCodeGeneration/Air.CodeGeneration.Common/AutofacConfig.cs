@@ -43,86 +43,13 @@ namespace Air.CodeGeneration.Common
         }
 
 
-        public static List<Type> RegisterObj(ContainerBuilder builder, List<Assembly> assemblieLst)
+        public static void RegisterObj(ContainerBuilder builder, List<Assembly> assemblieLst)
         {
             var loadedProfiles = RetrieveProfiles(assemblieLst);
             builder.RegisterTypes(loadedProfiles.ToArray());
-            return loadedProfiles;
-            #region 注释代码
-            //var assemblies = assemblieLst.ToArray();
-            //builder.RegisterAssemblyTypes(assemblies)
-            //    .Where(t => typeof(Profile).IsAssignableFrom(t) && !t.IsAbstract && t.IsPublic)
-            //    .As<Profile>();
-
-            //builder.Register(c => new MapperConfiguration(cfg =>
-            //{
-            //    foreach (var profile in c.Resolve<IEnumerable<Profile>>())
-            //    {
-            //        cfg.AddProfile(profile);
-            //    }
-            //})).AsSelf().SingleInstance();
-
-            //builder.Register(c => c.Resolve<MapperConfiguration>()
-            //    .CreateMapper(c.Resolve))
-            //    .As<IMapper>()
-            //    .InstancePerLifetimeScope();
-
-            //// AutoMapper
-            //// Register all the profiles
-            //builder.RegisterAssemblyTypes().AssignableTo(typeof(Profile)).As<Profile>();
-            //builder.Register(c => new MapperConfiguration(cfg =>
-            //{
-            //    //cfg.AddProfile(new AppProfile());
-            //    foreach (var profile in c.Resolve<IEnumerable<Profile>>())
-            //    {
-            //        cfg.AddProfile(profile);
-            //    }
-            //})).AsSelf().SingleInstance();
-            //builder.Register(c => c.Resolve<MapperConfiguration>()
-            //    .CreateMapper(c.Resolve))
-            //    .As<IMapper>()
-            //    .InstancePerLifetimeScope();
-            #endregion
+            ContainerManager.Container = builder.Build();
+            RegisterAutoMapper(ContainerManager.Container, loadedProfiles);
         }
-
-        //private static void SetAutofacContainer()
-        //{
-        //    var builder = new ContainerBuilder();
-
-        //    builder.RegisterControllers(Assembly.GetExecutingAssembly());
-        //    builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerRequest();
-        //    builder.RegisterType<DbFactory>().As<IDbFactory>().InstancePerRequest();
-
-        //    // Repositories
-        //    builder.RegisterAssemblyTypes(typeof(TrainingRepository).Assembly)
-        //        .Where(t => t.Name.EndsWith("Repository"))
-        //        .AsImplementedInterfaces().InstancePerRequest();
-
-        //    // Services
-        //    builder.RegisterAssemblyTypes(typeof(CourseService).Assembly)
-        //       .Where(t => t.Name.EndsWith("Service"))
-        //       .AsImplementedInterfaces().InstancePerRequest();
-
-        //    // AutoMapper
-        //    // Register all the profiles
-        //    builder.RegisterAssemblyTypes().AssignableTo(typeof(Profile)).As<Profile>();
-        //    builder.Register(c => new MapperConfiguration(cfg =>
-        //    {
-        //        //cfg.AddProfile(new AppProfile());
-        //        foreach (var profile in c.Resolve<IEnumerable<Profile>>())
-        //        {
-        //            cfg.AddProfile(profile);
-        //        }
-        //    })).AsSelf().SingleInstance();
-        //    builder.Register(c => c.Resolve<MapperConfiguration>()
-        //        .CreateMapper(c.Resolve))
-        //        .As<IMapper>()
-        //        .InstancePerLifetimeScope();
-
-        //    IContainer container = builder.Build();
-        //    DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
-        //}
-
 
         public static void RegisterAutoMapper(IContainer container, IEnumerable<Type> loadedProfiles)
         {
