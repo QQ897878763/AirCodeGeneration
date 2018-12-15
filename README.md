@@ -12,8 +12,8 @@
 > SQL Server
 
 ### 使用方式
-1、Framework平台引用Air.Data,NetCore和NET Standard引用Air.Data.Core
-2、模型类的代码请参考下面代码
+1、Framework平台引用Air.Data,NetCore和NET Standard引用Air.Data.Core;<br>
+2、模型类的代码请参考下面代码;
 ```
   [DataBaseTableRule(IsCreateGnore = false)]
     public class CoreTest
@@ -35,7 +35,21 @@
         public DateTime CreateTime { get; set; }
     }
 ```
-3、打开AirCodeGeneration.exe，点击[选择DLL]打开包含模型类的DLL,在表格空间中选择你需要生成的模型后点击[生成SQL脚本]即可。
+3、打开AirCodeGeneration.exe，点击[选择DLL]打开包含模型类的DLL,在表格空间中选择你需要生成的模型后点击[生成SQL脚本]即可。<br>
+
+生成后的脚本如下
+```
+USE  [TestDB]
+-------------------------------Create Table CoreTest ------------------------------------
+     CREATE TABLE [dbo].[CoreTest] 
+     (
+       Id   Int  Identity(1,1)   Primary Key    ,  -- 主键    
+       Code   Int  Not Null     ,  -- 编码    
+       Name   Varchar(20)  Not Null     ,  --    
+       IsDelete   Int  Not Null  default  0     ,  --    
+       CreateTime   DateTime  Not Null  default  GetDate()     --    
+     )
+```
 
 详细案例可参考源码中的Air.Code.Generation.Sample项目
 
