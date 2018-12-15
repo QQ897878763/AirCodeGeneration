@@ -17,7 +17,7 @@ using Air.Data.Core.Model;
 using Air.T4.Common;
 using Air.T4.Common.Host;
 using Air.T4.Common.Model.Database;
-
+using AutoMapper;
 
 namespace AirCodeGeneration
 {
@@ -133,7 +133,9 @@ namespace AirCodeGeneration
                             T4EngineHelper.SetCoreDataBaseTableItems(tableName, database, _lst_Types);
                         }
                         if (database.TableItems.Count <= 0) return;
-                        hostDatabase.TableItems = database.TableItems.MapTo(new List<HostDatabaseTable>());
+                        // hostDatabase.TableItems = database.TableItems.MapTo(new List<HostDatabaseTable>());
+                        // var mapper = new Mapper(Mapper.Configuration);
+                        hostDatabase.TableItems = Mapper.Map<List<HostDatabaseTable>>(database.TableItems);
                         break;
                     }
                 case 2:  //Framework
@@ -152,7 +154,8 @@ namespace AirCodeGeneration
                             T4EngineHelper.SetDataBaseTableItems(tableName, database, _lst_Types);
                         }
                         if (database.TableItems.Count <= 0) return;
-                        hostDatabase.TableItems = database.TableItems.MapTo(new List<HostDatabaseTable>());
+                        //hostDatabase.TableItems = database.TableItems.MapTo(new List<HostDatabaseTable>());
+                        hostDatabase.TableItems = Mapper.Map<List<HostDatabaseTable>>(database.TableItems);
                         break;
                     }
                 default:
