@@ -201,23 +201,13 @@
     <Compile Include="FrmSqlScript.Designer.cs">
       <DependentUpon>FrmSqlScript.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmSQLServerConnect.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrmSQLServerConnect.Designer.cs">
-      <DependentUpon>FrmSQLServerConnect.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Content Include="T4Template\CreateTable.txt" />
     <EmbeddedResource Include="FrmScriptCore.resx">
       <DependentUpon>FrmScriptCore.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmSqlScript.resx">
       <DependentUpon>FrmSqlScript.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FrmSQLServerConnect.resx">
-      <DependentUpon>FrmSQLServerConnect.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -267,9 +257,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="T4Template\TemplateCoreCreateDataBaseTable.sql.tt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="T4Template\Test.tt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="T4Template\TemplateCreateDataBaseTable.sql.tt">

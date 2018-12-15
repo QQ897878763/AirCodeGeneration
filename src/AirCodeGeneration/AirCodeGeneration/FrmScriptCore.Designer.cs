@@ -29,12 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmScriptCore));
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.rich_Txt_Logs = new System.Windows.Forms.RichTextBox();
-            this.Col_ColumnCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Col_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Col_Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Col_Sel = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.dgv_Dll = new System.Windows.Forms.DataGridView();
             this.tab_Details = new System.Windows.Forms.TabPage();
             this.tabControl_Pages = new System.Windows.Forms.TabControl();
@@ -50,6 +47,10 @@
             this.btn_SelectDLL = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.pan_Head = new System.Windows.Forms.Panel();
+            this.Col_Sel = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Col_Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Col_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Col_ColumnCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Dll)).BeginInit();
             this.tab_Details.SuspendLayout();
             this.tabControl_Pages.SuspendLayout();
@@ -66,40 +67,12 @@
             // rich_Txt_Logs
             // 
             this.rich_Txt_Logs.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.rich_Txt_Logs.Location = new System.Drawing.Point(3, 129);
+            this.rich_Txt_Logs.Location = new System.Drawing.Point(3, 399);
             this.rich_Txt_Logs.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.rich_Txt_Logs.Name = "rich_Txt_Logs";
-            this.rich_Txt_Logs.Size = new System.Drawing.Size(1171, 180);
+            this.rich_Txt_Logs.Size = new System.Drawing.Size(1171, 10);
             this.rich_Txt_Logs.TabIndex = 0;
             this.rich_Txt_Logs.Text = "";
-            // 
-            // Col_ColumnCount
-            // 
-            this.Col_ColumnCount.DataPropertyName = "FieldCount";
-            this.Col_ColumnCount.HeaderText = "字段数";
-            this.Col_ColumnCount.Name = "Col_ColumnCount";
-            this.Col_ColumnCount.Width = 90;
-            // 
-            // Col_Name
-            // 
-            this.Col_Name.DataPropertyName = "Name";
-            this.Col_Name.HeaderText = "名称";
-            this.Col_Name.Name = "Col_Name";
-            this.Col_Name.Width = 200;
-            // 
-            // Col_Number
-            // 
-            this.Col_Number.DataPropertyName = "Sort";
-            this.Col_Number.HeaderText = "序号";
-            this.Col_Number.Name = "Col_Number";
-            this.Col_Number.Width = 50;
-            // 
-            // Col_Sel
-            // 
-            this.Col_Sel.DataPropertyName = "IsSel";
-            this.Col_Sel.HeaderText = "选择";
-            this.Col_Sel.Name = "Col_Sel";
-            this.Col_Sel.Width = 50;
             // 
             // dgv_Dll
             // 
@@ -117,7 +90,7 @@
             this.dgv_Dll.RowHeadersVisible = false;
             this.dgv_Dll.RowTemplate.Height = 27;
             this.dgv_Dll.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_Dll.Size = new System.Drawing.Size(1171, 125);
+            this.dgv_Dll.Size = new System.Drawing.Size(1171, 395);
             this.dgv_Dll.TabIndex = 1;
             // 
             // tab_Details
@@ -128,7 +101,7 @@
             this.tab_Details.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tab_Details.Name = "tab_Details";
             this.tab_Details.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tab_Details.Size = new System.Drawing.Size(1177, 313);
+            this.tab_Details.Size = new System.Drawing.Size(1177, 413);
             this.tab_Details.TabIndex = 0;
             this.tab_Details.Text = "DLL详情";
             this.tab_Details.UseVisualStyleBackColor = true;
@@ -142,7 +115,7 @@
             this.tabControl_Pages.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabControl_Pages.Name = "tabControl_Pages";
             this.tabControl_Pages.SelectedIndex = 0;
-            this.tabControl_Pages.Size = new System.Drawing.Size(1185, 345);
+            this.tabControl_Pages.Size = new System.Drawing.Size(1185, 445);
             this.tabControl_Pages.TabIndex = 0;
             // 
             // tab_Code
@@ -151,7 +124,7 @@
             this.tab_Code.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tab_Code.Name = "tab_Code";
             this.tab_Code.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tab_Code.Size = new System.Drawing.Size(1255, 709);
+            this.tab_Code.Size = new System.Drawing.Size(1177, 313);
             this.tab_Code.TabIndex = 1;
             this.tab_Code.Text = "输出代码";
             this.tab_Code.UseVisualStyleBackColor = true;
@@ -163,7 +136,7 @@
             this.pan_Fill.Location = new System.Drawing.Point(0, 199);
             this.pan_Fill.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pan_Fill.Name = "pan_Fill";
-            this.pan_Fill.Size = new System.Drawing.Size(1185, 345);
+            this.pan_Fill.Size = new System.Drawing.Size(1185, 445);
             this.pan_Fill.TabIndex = 3;
             // 
             // txt_DatabaseName
@@ -260,15 +233,45 @@
             this.pan_Head.Size = new System.Drawing.Size(1185, 199);
             this.pan_Head.TabIndex = 2;
             // 
+            // Col_Sel
+            // 
+            this.Col_Sel.DataPropertyName = "IsSel";
+            this.Col_Sel.HeaderText = "选择";
+            this.Col_Sel.Name = "Col_Sel";
+            this.Col_Sel.Width = 60;
+            // 
+            // Col_Number
+            // 
+            this.Col_Number.DataPropertyName = "Sort";
+            this.Col_Number.HeaderText = "序号";
+            this.Col_Number.Name = "Col_Number";
+            this.Col_Number.Width = 50;
+            // 
+            // Col_Name
+            // 
+            this.Col_Name.DataPropertyName = "Name";
+            this.Col_Name.HeaderText = "名称";
+            this.Col_Name.Name = "Col_Name";
+            this.Col_Name.Width = 200;
+            // 
+            // Col_ColumnCount
+            // 
+            this.Col_ColumnCount.DataPropertyName = "FieldCount";
+            this.Col_ColumnCount.HeaderText = "字段数";
+            this.Col_ColumnCount.Name = "Col_ColumnCount";
+            this.Col_ColumnCount.Width = 90;
+            // 
             // FrmScriptCore
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1185, 544);
+            this.ClientSize = new System.Drawing.Size(1185, 644);
             this.Controls.Add(this.pan_Fill);
             this.Controls.Add(this.pan_Head);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmScriptCore";
-            this.Text = "FrmScriptCore";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "生成.NetCore实体DB脚本";
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Dll)).EndInit();
             this.tab_Details.ResumeLayout(false);
             this.tabControl_Pages.ResumeLayout(false);
@@ -283,10 +286,6 @@
 
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.RichTextBox rich_Txt_Logs;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Col_ColumnCount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Col_Name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Col_Number;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Col_Sel;
         private System.Windows.Forms.DataGridView dgv_Dll;
         private System.Windows.Forms.TabPage tab_Details;
         private System.Windows.Forms.TabControl tabControl_Pages;
@@ -302,5 +301,9 @@
         private System.Windows.Forms.Button btn_SelectDLL;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Panel pan_Head;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Col_Sel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Col_Number;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Col_Name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Col_ColumnCount;
     }
 }
