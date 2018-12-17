@@ -1,0 +1,27 @@
+﻿<#@ template language="C#" hostSpecific="true" debug="false" #>  
+<#@ output extension=".cs" #>
+
+<# 
+    DataBaseCoreHost host = (DataBaseCoreHost)(Host); 
+    var databaseInfo=host.Database;
+#> 
+
+ 
+USE  [<#=        databaseInfo.Name #>]
+<#
+    for(int i=0;i < databaseInfo.TableItems.Count;i++)
+    { 
+#>
+-------------------------------Create Table <#=            databaseInfo.TableItems[i].Name #> ------------------------------------
+     CREATE TABLE [dbo].[<#=            databaseInfo.TableItems[i].Name #>] 
+     (
+<#        for(int k =0; k< databaseInfo.TableItems[i].FieldRuleItems.Count;k++)
+         {
+            var item = databaseInfo.TableItems[i].FieldRuleItems[k];
+#>       <#=                item.Name #>   <#=                item.DataType #> <#            if(!string.IsNullOrWhiteSpace(item.IdentityValue)){ #> <#=                    item.IdentityValue #> <#            }#><#            if(!string.IsNullOrWhiteSpace(item.Constraint)){ #> <#=                    item.Constraint #> <#            }#><#            if(!string.IsNullOrWhiteSpace(item.DefaultValue)){ #> default  <#=                    item.DefaultValue #> <#            }#> <#            if(item.IsPramaryKey){ #> Primary Key <#            } #>  <#            if(k != databaseInfo.TableItems[i].FieldRuleItems.Count-1){#> , <#} #> --<#if(!string.IsNullOrWhiteSpace(item.Remark)){ #> <#=item.Remark #><#} #>
+    
+<#       }#>  
+     )
+<#    
+    }#>
+
