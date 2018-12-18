@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Air.Data.Core.Model
+namespace Air.CodeGeneration.Data.Model
 {
     /// <summary>
     /// 数据库表字段信息

@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
-namespace Air.Data.Core.Attribute
+namespace Air.CodeGeneration.Data.Attribute
 {
     /// <summary>
     /// 数据库数据表模型规则特性

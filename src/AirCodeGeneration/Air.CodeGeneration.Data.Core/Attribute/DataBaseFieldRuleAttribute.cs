@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Air.Data.Core.Attribute
+namespace Air.CodeGeneration.Data.Core.Attribute
 {
     /// <summary>
     /// 数据库字段模型规则特性

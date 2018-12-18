@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Air.Data.Attribute;
+using Air.CodeGeneration.Data.Attribute;
 
 
 namespace Air.Code.Generation.Sample

@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace Air.Data.Attribute
+namespace Air.CodeGeneration.Data.Attribute
 {
     /// <summary>
     /// 数据库字段模型规则特性
@@ -21,7 +18,7 @@ namespace Air.Data.Attribute
         /// 进行数据库创建时候是否自动屏蔽
         /// </summary>
         public bool IsCreateGnore { get; set; }
- 
+
         /// <summary>
         /// 是否为主键
         /// </summary>

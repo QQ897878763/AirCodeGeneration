@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Air.CodeGeneration.Data.Core.Attribute;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Air.Data.Core.Attribute;
+ 
 
 namespace Air.Code.Generation.Sample
 {

@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 using Air.Currency.Frame.Library;
 using System.Windows.Forms;
 using Air.CodeGeneration.Common;
-using Air.Data.Core.Attribute;
-using Air.Data.Core.Dto;
+using Air.CodeGeneration.Data.Core.Attribute;
+using Air.CodeGeneration.Data.Core.Dto;
 using System.Reflection;
-using Air.Data.Core.Model;
+using Air.CodeGeneration.Data.Core.Model;
 using Air.T4.Common;
 using Air.T4.Common.Host;
 using Air.T4.Common.Model.Database;
@@ -119,7 +119,7 @@ namespace AirCodeGeneration
             {
                 case 1: //.Net Standard
                     {
-                        Air.Data.Core.Model.Database database = new Air.Data.Core.Model.Database()
+                        Air.CodeGeneration.Data.Core.Model.Database database = new Air.CodeGeneration.Data.Core.Model.Database()
                         {
                             Name = txt_DatabaseName.Text
                         };
@@ -140,11 +140,11 @@ namespace AirCodeGeneration
                     }
                 case 2:  //Framework
                     {
-                        Air.Data.Model.Database database = new Air.Data.Model.Database()
+                        Air.CodeGeneration.Data.Model.Database database = new Air.CodeGeneration.Data.Model.Database()
                         {
                             Name = txt_DatabaseName.Text
                         };
-                        database.TableItems = new List<Air.Data.Model.DatabaseTable>();
+                        database.TableItems = new List<Air.CodeGeneration.Data.Model.DatabaseTable>();
                         foreach (DataGridViewRow row in dgv_Dll.Rows)
                         {
                             if (row.Cells["Col_Name"].Value.ToString() == "全选") continue;

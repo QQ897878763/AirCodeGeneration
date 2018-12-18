@@ -215,17 +215,17 @@
       <Project>{2283403F-C89F-4A7D-9594-9D1103AF61E2}</Project>
       <Name>Air.CodeGeneration.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Air.CodeGeneration.Data.Core\Air.CodeGeneration.Data.Core.csproj">
+      <Project>{b4e28e75-683e-449d-9a27-61fa59e1a45d}</Project>
+      <Name>Air.CodeGeneration.Data.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Air.CodeGeneration.Data\Air.CodeGeneration.Data.csproj">
+      <Project>{b852be3c-c246-4fb8-adef-17306c4ecad0}</Project>
+      <Name>Air.CodeGeneration.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Air.Currency.Frame.Library\Air.Currency.Frame.Library.csproj">
       <Project>{b4c93802-b58c-4d5d-8040-d3160f1d7c98}</Project>
       <Name>Air.Currency.Frame.Library</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Air.Data.Core\Air.Data.Core.csproj">
-      <Project>{543b2daf-4c2e-4292-8c1b-4ad7afae48a9}</Project>
-      <Name>Air.Data.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Air.Data\Air.Data.csproj">
-      <Project>{2C86C022-48E5-4C21-AD8B-CBEFE4D4A51E}</Project>
-      <Name>Air.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

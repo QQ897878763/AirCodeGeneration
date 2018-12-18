@@ -47,13 +47,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Air.Data.Core\Air.Data.Core.csproj">
-      <Project>{543b2daf-4c2e-4292-8c1b-4ad7afae48a9}</Project>
-      <Name>Air.Data.Core</Name>
+    <ProjectReference Include="..\Air.CodeGeneration.Data.Core\Air.CodeGeneration.Data.Core.csproj">
+      <Project>{b4e28e75-683e-449d-9a27-61fa59e1a45d}</Project>
+      <Name>Air.CodeGeneration.Data.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Air.Data\Air.Data.csproj">
-      <Project>{2c86c022-48e5-4c21-ad8b-cbefe4d4a51e}</Project>
-      <Name>Air.Data</Name>
+    <ProjectReference Include="..\Air.CodeGeneration.Data\Air.CodeGeneration.Data.csproj">
+      <Project>{b852be3c-c246-4fb8-adef-17306c4ecad0}</Project>
+      <Name>Air.CodeGeneration.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

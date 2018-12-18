@@ -1,9 +1,10 @@
-﻿using Air.Data.Attribute;
+﻿
+using Air.CodeGeneration.Data.Core.Attribute;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Air.Data.Model
+namespace Air.CodeGeneration.Data.Core.Model
 {
     /// <summary>
     /// 数据库表信息

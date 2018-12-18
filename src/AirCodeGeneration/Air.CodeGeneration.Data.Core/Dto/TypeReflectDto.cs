@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Air.Data.Dto
+namespace Air.CodeGeneration.Data.Core.Dto
 {
     /// <summary>
     /// 类型反射DTO

@@ -12,8 +12,8 @@ namespace Air.T4.Common.AutoMapperProfile
     {
         public HostDatabaseTableProfile()
         {
-            CreateMap<Air.Data.Core.Model.DatabaseTable, Air.T4.Common.Model.Database.HostDatabaseTable>();
-            CreateMap<Air.Data.Model.DatabaseTable, Air.T4.Common.Model.Database.HostDatabaseTable>();
+            CreateMap<Air.CodeGeneration.Data.Core.Model.DatabaseTable, Air.T4.Common.Model.Database.HostDatabaseTable>();
+            CreateMap<Air.CodeGeneration.Data.Model.DatabaseTable, Air.T4.Common.Model.Database.HostDatabaseTable>();
         }
     }
 
