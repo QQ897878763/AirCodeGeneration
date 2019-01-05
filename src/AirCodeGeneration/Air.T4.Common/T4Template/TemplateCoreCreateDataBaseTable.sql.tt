@@ -8,7 +8,8 @@
 #> 
 
  
-USE  [<#=        databaseInfo.Name #>]
+USE  [<#=        databaseInfo.Name #>] 
+GO
 <#
     for(int i=0;i < databaseInfo.TableItems.Count;i++)
     { 

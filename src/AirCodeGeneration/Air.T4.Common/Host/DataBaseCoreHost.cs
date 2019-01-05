@@ -57,6 +57,7 @@ namespace Air.T4.Common.Host
                     "System.Linq",
                     "System.Text",
                     "System.Collections.Generic",
+                    "System.Collections",
                     "Air.T4.Common",
                     "Air.T4.Common.Host",
                     "Air.T4.Common.Model.Database",
@@ -72,8 +73,9 @@ namespace Air.T4.Common.Host
                 {
                     typeof(Uri).Assembly.Location,
                     typeof(BaseHost).Assembly.Location,
+                    typeof(DataBaseCoreHost).Assembly.Location,
                     typeof(ParallelExecutionMode).Assembly.Location,
-                    typeof(HostDatabase).Assembly.Location,
+                    typeof(HostDatabase).Assembly.Location,                   
                     typeof(List<>).Assembly.Location,
                 };
             }
