@@ -2,6 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>依托在模型类上的特性，用于SQL脚本以及API、前端 等代码生成用。
+作者Email:897878763@qq.com</Description>
+    <Version>1.0.2</Version>
+    <NeutralLanguage />
+    <Copyright>花吖</Copyright>
   </PropertyGroup>
 
 </Project>
