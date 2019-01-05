@@ -84,6 +84,7 @@ namespace Air.T4.Common.Host
                     "System.Linq",
                     "System.Text",
                     "System.Collections.Generic",
+                    "System.Collections",
                     "Air.T4.Common"
                 };
             }

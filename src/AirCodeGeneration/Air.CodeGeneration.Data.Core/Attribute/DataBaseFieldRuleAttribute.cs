@@ -9,7 +9,7 @@ namespace Air.CodeGeneration.Data.Core.Attribute
     /// 数据库字段模型规则特性
     /// </summary>
     [Serializable]
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
+    [AttributeUsage(AttributeTargets.Property)]
     public class DataBaseFieldRuleAttribute : System.Attribute
     {
         /// <summary>
@@ -21,7 +21,7 @@ namespace Air.CodeGeneration.Data.Core.Attribute
         /// 进行数据库创建时候是否自动屏蔽
         /// </summary>
         public bool IsCreateGnore { get; set; }
- 
+
         /// <summary>
         /// 是否为主键
         /// </summary>
@@ -54,6 +54,12 @@ namespace Air.CodeGeneration.Data.Core.Attribute
         /// 数据库备注信息
         /// </summary>
         public string Remark { get; set; }
+
+        /// <summary>
+        /// 序号
+        /// 生成数据库建表时会依照该序号顺序生成字段
+        /// </summary>
+        public int Sort { get; set; }
     }
 
 

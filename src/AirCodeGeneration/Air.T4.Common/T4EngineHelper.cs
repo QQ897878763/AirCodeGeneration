@@ -135,6 +135,8 @@ namespace Air.T4.Common
                 }
                 table.FieldRuleItems.Add(attribute);
             }
+            //对字段进行排序(查询SQL 时候方便些...)
+            table.FieldRuleItems = (from o in table.FieldRuleItems orderby o.Sort select o).ToList();
             database.TableItems.Add(table);
         }
 
@@ -175,6 +177,8 @@ namespace Air.T4.Common
                 }
                 table.FieldRuleItems.Add(attribute);
             }
+            //对字段进行排序(查询SQL 时候方便些...)
+            table.FieldRuleItems = (from o in table.FieldRuleItems orderby o.Sort select o).ToList();
             database.TableItems.Add(table);
         }
 

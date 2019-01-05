@@ -55,5 +55,11 @@ namespace Air.T4.Common.Model.Database
         /// 数据库备注信息
         /// </summary>
         public string Remark { get; set; }
+
+        /// <summary>
+        /// 序号
+        /// 生成数据库建表时会依照该序号顺序生成字段
+        /// </summary>
+        public int Sort { get; set; }
     }
 }

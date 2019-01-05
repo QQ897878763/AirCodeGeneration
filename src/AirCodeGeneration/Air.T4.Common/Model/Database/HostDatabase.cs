@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+ 
 namespace Air.T4.Common.Model.Database
 {
     /// <summary>
@@ -21,5 +21,6 @@ namespace Air.T4.Common.Model.Database
         /// 数据表集合
         /// </summary>
         public List<HostDatabaseTable> TableItems { get; set; }
+    
     }
 }
