@@ -113,7 +113,7 @@ namespace AirCodeGeneration
             HostDatabase hostDatabase = new HostDatabase();
             hostDatabase.Name = txt_DatabaseName.Text;
             DataBaseCoreHost host = new DataBaseCoreHost(hostDatabase);
-            string scriptFileName = string.Empty;
+            string scriptFileName = !string.IsNullOrWhiteSpace(hostDatabase.Name) ? hostDatabase.Name : "CodeGeneration";
 
             switch (platform)
             {
@@ -128,7 +128,6 @@ namespace AirCodeGeneration
                         {
                             if (row.Cells["Col_Name"].Value.ToString() == "全选") continue;
                             if (row.Cells["Col_Sel"].Value.ToString() == "false") continue;
-                            scriptFileName = row.Cells["Col_Name"].Value.ToString();
                             string tableName = row.Cells["Col_Name"].Value.ToString();
                             T4EngineHelper.SetCoreDataBaseTableItems(tableName, database, _lst_Types);
                         }
@@ -149,7 +148,6 @@ namespace AirCodeGeneration
                         {
                             if (row.Cells["Col_Name"].Value.ToString() == "全选") continue;
                             if (row.Cells["Col_Sel"].Value.ToString() == "false") continue;
-                            scriptFileName = row.Cells["Col_Name"].Value.ToString();
                             string tableName = row.Cells["Col_Name"].Value.ToString();
                             T4EngineHelper.SetDataBaseTableItems(tableName, database, _lst_Types);
                         }
@@ -162,6 +160,9 @@ namespace AirCodeGeneration
                     throw new Exception($"参数[{nameof(platform)}]值有误!");
             }
             string output = Path.Combine(txt_Output.Text, scriptFileName + ".sql");
+            if (!Directory.Exists(txt_Output.Text))
+                Directory.CreateDirectory(txt_Output.Text);
+
             rtb_Script.Text = T4EngineHelper.ProcessTemplate(t4FilePath, host, output, LogWrite);
         }
 

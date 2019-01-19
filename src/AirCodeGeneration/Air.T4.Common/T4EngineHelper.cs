@@ -47,6 +47,7 @@ namespace Air.T4.Common
             {
                 outputPath = Path.Combine(Path.GetDirectoryName(templateFilePath), Path.GetFileNameWithoutExtension(templateFilePath) + host.FileExtension);
             }
+
             File.WriteAllText(outputPath, output, host.FileEncoding);
 
             if (logAction == null) return;
@@ -78,11 +79,8 @@ namespace Air.T4.Common
             {
                 outputPath = Path.Combine(Path.GetDirectoryName(templateFilePath), Path.GetFileNameWithoutExtension(templateFilePath) + host.FileExtension);
             }
-            if (!string.IsNullOrWhiteSpace(output))
-            {
-                output = output.Trim();
-            }
-            File.WriteAllText(outputPath, output, host.FileEncoding);
+          
+            File.WriteAllText(outputPath, output.Trim(), host.FileEncoding);
 
             if (logAction == null) return output;
             if (host.Errors?.Count > 0)
