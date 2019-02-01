@@ -1,29 +1,63 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using Air.T4.Common.Host;
-using Air.T4.Common.Model.Database;
 
 namespace Air.T4.Common.Host
 {
     /// <summary>
-    /// 数据库T4模板服务Host
+    /// 后台WebAPI T4模板服务Host
     /// </summary>
     [Serializable]
-    public class DataBaseCoreHost : BaseHost
+    public class HtWebApiHost : BaseHost
     {
         /// <summary>
-        /// 数据库信息
+        /// 实体
         /// </summary>
-        public readonly HostDatabase Database;
+        public readonly Type Entity;
 
-        public DataBaseCoreHost(HostDatabase database)
+        /// <summary>
+        /// 命名空间
+        /// </summary>
+        public readonly string NameSpace;
+
+        /// <summary>
+        /// 类名
+        /// </summary>
+        public readonly string ClassName;
+        public HtWebApiHost(Type entity, string nameSpace, string className)
         {
-            Database = database;
+            NameSpace = nameSpace;
+            Entity = entity;
+            ClassName = className;
+            var items = entity.GetProperties();
 
+            for (int i = 0; i < items.Length; i++)
+            {
+                var item = items[i];
+                string name = item.Name; //字段名称
+                string type = item.PropertyType.Name;
+                if (item.PropertyType.FullName.Contains("Nullable"))
+                    type = string.Concat(item.PropertyType.GenericTypeArguments[0].Name, "?");
+                if (item.PropertyType.FullName.Contains("Boolean"))
+                    type = type.Replace("Boolean", "bool");
+                if (!item.PropertyType.FullName.Contains("DateTime"))
+                    type = type.Replace("Int64", "long").ToLower();
+            }
         }
+
+        //private void SetCreateInputItems(string assemPath)
+        //{
+        //    if (!instance.IsClass) return;
+        //    PropertyInfo[] lstPropertys = instance.GetProperties();
+        //    foreach (var item in lstPropertys)
+        //    {
+        //        string typeName = item.PropertyType.GetTypeInfo().FullName;
+        //        string name = item.PropertyType.FullName;
+        //    }
+        //}
 
 
         public override object GetHostOption(string optionName)
@@ -61,6 +95,7 @@ namespace Air.T4.Common.Host
                     "Air.T4.Common",
                     "Air.T4.Common.Host",
                     "Air.T4.Common.Model.Database",
+
                 };
             }
         }
@@ -75,7 +110,6 @@ namespace Air.T4.Common.Host
                     typeof(BaseHost).Assembly.Location,
                     typeof(DataBaseCoreHost).Assembly.Location,
                     typeof(ParallelExecutionMode).Assembly.Location,
-                    typeof(HostDatabase).Assembly.Location,
                     typeof(List<>).Assembly.Location,
                 };
             }

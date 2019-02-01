@@ -21,7 +21,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Air.Currency.Frame.Library"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02.Infrastructure", "02.Infrastructure", "{6749B9D3-ED3B-4CF1-B9B0-B56BC54D6881}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Air.CodeGeneration.Data.Core", "Air.CodeGeneration.Data.Core\Air.CodeGeneration.Data.Core.csproj", "{B4E28E75-683E-449D-9A27-61FA59E1A45D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Air.CodeGeneration.Data.Core", "Air.CodeGeneration.Data.Core\Air.CodeGeneration.Data.Core.csproj", "{B4E28E75-683E-449D-9A27-61FA59E1A45D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Air.CodeGeneration.Data", "Air.CodeGeneration.Data\Air.CodeGeneration.Data.csproj", "{B852BE3C-C246-4FB8-ADEF-17306C4ECAD0}"
 EndProject

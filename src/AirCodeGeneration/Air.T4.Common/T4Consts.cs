@@ -17,6 +17,11 @@ namespace Air.T4.Common
         public const string DB_TABLE_CREATE_FILE_NAME = "TemplateCoreCreateDataBaseTable.sql.tt";
 
         /// <summary>
+        /// 创建后台WebAPI input
+        /// </summary>
+        public const string WEB_API_CREATE_INPUT_HT = "TemplateHtWebApiCreateInput.tt";
+
+        /// <summary>
         /// T4文件存储文件夹名称
         /// </summary>
         public const string FILE_Folder = "T4Template";

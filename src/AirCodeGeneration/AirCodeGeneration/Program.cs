@@ -21,7 +21,7 @@ namespace AirCodeGeneration
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             RegisterIOC();
-            Application.Run(new FrmScriptCore());
+            Application.Run(new FrmMain());
         }
 
 

@@ -127,13 +127,11 @@ namespace AirCodeGeneration
                         foreach (DataGridViewRow row in dgv_Dll.Rows)
                         {
                             if (row.Cells["Col_Name"].Value.ToString() == "全选") continue;
-                            if (row.Cells["Col_Sel"].Value.ToString() == "false") continue;
+                            if (row.Cells["Col_Sel"].Value.ToString().ToLower() == "false") continue;
                             string tableName = row.Cells["Col_Name"].Value.ToString();
                             T4EngineHelper.SetCoreDataBaseTableItems(tableName, database, _lst_Types);
                         }
                         if (database.TableItems.Count <= 0) return;
-                        // hostDatabase.TableItems = database.TableItems.MapTo(new List<HostDatabaseTable>());
-                        // var mapper = new Mapper(Mapper.Configuration);
                         hostDatabase.TableItems = Mapper.Map<List<HostDatabaseTable>>(database.TableItems);
                         break;
                     }
@@ -147,12 +145,11 @@ namespace AirCodeGeneration
                         foreach (DataGridViewRow row in dgv_Dll.Rows)
                         {
                             if (row.Cells["Col_Name"].Value.ToString() == "全选") continue;
-                            if (row.Cells["Col_Sel"].Value.ToString() == "false") continue;
+                            if (row.Cells["Col_Sel"].Value.ToString().ToLower() == "false") continue;
                             string tableName = row.Cells["Col_Name"].Value.ToString();
                             T4EngineHelper.SetDataBaseTableItems(tableName, database, _lst_Types);
                         }
                         if (database.TableItems.Count <= 0) return;
-                        //hostDatabase.TableItems = database.TableItems.MapTo(new List<HostDatabaseTable>());
                         hostDatabase.TableItems = Mapper.Map<List<HostDatabaseTable>>(database.TableItems);
                         break;
                     }

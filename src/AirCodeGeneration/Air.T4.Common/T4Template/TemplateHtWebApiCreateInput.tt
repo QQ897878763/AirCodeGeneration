@@ -1,0 +1,34 @@
+﻿<#@ template language="C#" hostSpecific="true" debug="false" #>  
+<#@ output extension=".cs" #>
+<# 
+    HtWebApiHost host = (HtWebApiHost)(Host); 
+    var Entity= host.Entity;
+    var Namespace = host.NameSpace;
+    var ClassName = host.ClassName;
+#> 
+using System;
+namespace  <#=        Namespace #>
+{
+    public class <#=        ClassName #>
+    {
+<#
+    var items= Entity.GetProperties();
+    for(int i =0 ;i<items.Length;i++)
+    {
+        var item =items[i];
+        string type = item.PropertyType.Name;
+        if (item.PropertyType.FullName.Contains("Nullable"))
+            type = string.Concat(item.PropertyType.GenericTypeArguments[0].Name, "?");
+        if (item.PropertyType.FullName.Contains("Boolean"))
+            type = type.Replace("Boolean", "bool");
+        if (!item.PropertyType.FullName.Contains("DateTime"))
+            type = type.Replace("Int64", "long").ToLower();
+        //替换关键字
+        type = type.Replace("Int64", "long");
+#>
+       public <#=            type #>   <#=            item.Name #>{ get; set; }
+
+<#    }
+#>
+    }
+}
